@@ -1,0 +1,27 @@
+{
+  "model": "gpt-4o-mini",
+  "messages": [
+    {
+      "role": "system",
+      "content": "{system_content}"
+    },
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "{user_text}"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "{image_base64}",
+            "detail": "low"
+          }
+        }
+      ]
+    }
+  ],
+  "max_tokens": 100,
+  "temperature": 0.2
+}
