@@ -17,8 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MimeType;
+import org.springframework.web.client.RestTemplate;
 
 
 import java.util.ArrayList;
@@ -33,27 +38,55 @@ public class AiServiceImpl implements AiService {
 
     @Value("${ai.rag_prompt_template}")
     private Resource ragPromptTemplate;
+    @Value("${ai.prompt_template}")
+    private Resource promptTemplate;
     @Value("${ai.function_prompt_template}")
     private Resource functionPromptTemplate;
     @Value("${ai.json_prompt_template}")
     private Resource jsonPromptTemplate;
+    private RestTemplate restTemplate = new RestTemplate();
 
     private ChatClient chatClient;
     private OpenAiChatOptions openAiChatOptions;
+    private String FDA_API = "https://api.fda.gov/drug/label.json?search=active_ingredient:";
 
 
 
     @Override
-    public Generation info(String question, String base64Image) {
+    public Generation info(String question) {
 
-        SystemMessage systemMsg = new SystemMessage("");
+        String query = activeIngredient(question);
 
-        List<Media> mediaList = List.of(new Media(MimeType.valueOf("image/webp"), base64Image));
-        UserMessage userMsg = new UserMessage(question, mediaList);
+        String result = null;
 
-        Prompt prompt = new Prompt(List.of(systemMsg, userMsg), openAiChatOptions);
+        if (query != "UNKNOWN"){
+            String url = FDA_API + query + "&limit=10";
 
-        return chatClient.call(prompt).getResult();
+            result = restTemplate.getForObject(url, String.class);
+
+
+        }
+
+        PromptTemplate promptTemp = new PromptTemplate(promptTemplate);
+        Prompt response = promptTemp.create(Map.of(
+                "input", question, "data", result));
+
+
+        return chatClient.call(response).getResult();
+    }
+
+    private String activeIngredient (String question){
+
+        PromptTemplate ragPrompt = new PromptTemplate(ragPromptTemplate);
+        Prompt prompt = ragPrompt.create(Map.of(
+                "input", question));
+
+
+
+        String content = chatClient.call(prompt).getResult().getOutput().getContent();
+        String query = content.trim().replace(" ", "+");
+
+        return query;
     }
 
 

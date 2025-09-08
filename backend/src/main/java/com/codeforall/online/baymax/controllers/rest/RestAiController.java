@@ -7,6 +7,8 @@ import com.codeforall.online.baymax.exceptions.MedicationNotFoundException;
 import com.codeforall.online.baymax.model.Medication;
 import com.codeforall.online.baymax.services.AiService;
 import com.codeforall.online.baymax.services.MedicationService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import org.springframework.ai.chat.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
@@ -15,6 +17,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A REST API AI Controller responsible for rendering AI responses
@@ -28,7 +34,26 @@ public class RestAiController {
     private GenerationToAnswerDto generationToAnswerDto;
     private MedicationService medicationService;
 
+
     @RequestMapping(method = RequestMethod.POST, path = {"/ask-baymax"})
+    public ResponseEntity<Generation> info(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        String question = questionDto.getQuestion(); // may be null
+
+
+        return new ResponseEntity<>(
+                aiService.info(question),
+                HttpStatus.OK
+        );
+    }
+
+
+
+    /*@RequestMapping(method = RequestMethod.POST, path = {"/ask-baymax"})
     public ResponseEntity<Generation> info(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -42,7 +67,7 @@ public class RestAiController {
                 aiService.info(question, base64Image),
                 HttpStatus.OK
         );
-    }
+    }*/
 
     @RequestMapping(method = RequestMethod.POST, path = {"/medication/{mid}"})
     public ResponseEntity<AnswerDto> customer(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult, @PathVariable Integer mid) {
@@ -62,6 +87,8 @@ public class RestAiController {
 
         return new ResponseEntity<>(generationToAnswerDto.convert(aiService.medicationInfo(medication, questionDto.getQuestion())), HttpStatus.OK);
     }
+
+
 
     @Autowired
     public void setAiService(AiService aiService) {

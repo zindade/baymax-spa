@@ -7,7 +7,7 @@ import org.springframework.ai.chat.prompt.Prompt;
 public interface AiService {
 
 
-    Generation info(String question, String base64Image);
+    Generation info(String question);
 
     Generation medicationInfo(Medication medication, String question);
 }
