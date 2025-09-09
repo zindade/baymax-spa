@@ -1,5 +1,4 @@
 
-
 export default function renderHome() {
   return `
     <div class="main-container">

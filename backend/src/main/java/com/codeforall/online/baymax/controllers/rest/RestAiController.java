@@ -95,10 +95,9 @@ public class RestAiController {
         String medicineName = payload.get("name");
 
         // Prompt para o ChatGPT
-        String prompt = String.format(
-                "Diz-me apenas o(s) princípio(s) ativo(s) em inglês (nome americano) do medicamento '%s'.",
-                medicineName
-        );
+        String prompt = "Responde apenas com o(s) nome(s) do(s) princípio(s) ativo(s) em inglês (nome usado nos EUA) "
+                + "do medicamento \"" + medicineName + "\". "
+                + "Não escrevas mais nada, sem frases, só os nomes separados por vírgula.";
 
         String activeIngredient = chatClient
                 .call(new Prompt(prompt))
