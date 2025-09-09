@@ -182,5 +182,85 @@ footer {
   align-items: center;   
 }
 
+.team {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 1.5rem; 
+  justify-items: center; 
+}
+
+.team img {
+  width: 250px;  
+  height: auto;
+  border-radius: 8px; 
+}
+
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;   /* center vertically */
+  padding: 2rem;
+  text-align: center; /* center text */
+}
+
+/* Left section */
+.search-section {
+  flex: none;
+  max-width: 900px;
+  background: transparent; /* no white box */
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.search-section h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.search-section p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  padding-right: 0.5rem;
+
+}
+
+.search-bar {
+  flex: 1;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 24px;
+  outline: none;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #555;
+}
+.search-btn:hover {
+  color: #000;
+}
+
+.search-bar:focus {
+  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+}
+
 
 
