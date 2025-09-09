@@ -10,6 +10,7 @@ import com.codeforall.online.baymax.services.MedicationService;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
+import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.Generation;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A REST API AI Controller responsible for rendering AI responses
@@ -33,7 +35,7 @@ public class RestAiController {
     private AiService aiService;
     private GenerationToAnswerDto generationToAnswerDto;
     private MedicationService medicationService;
-
+    private ChatClient chatClient;
 
     @RequestMapping(method = RequestMethod.POST, path = {"/ask-baymax"})
     public ResponseEntity<Generation> info(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult) {
@@ -67,7 +69,7 @@ public class RestAiController {
                 aiService.info(question, base64Image),
                 HttpStatus.OK
         );
-    }*/
+    }
 
     @RequestMapping(method = RequestMethod.POST, path = {"/medication/{mid}"})
     public ResponseEntity<AnswerDto> customer(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult, @PathVariable Integer mid) {
@@ -86,7 +88,27 @@ public class RestAiController {
         }
 
         return new ResponseEntity<>(generationToAnswerDto.convert(aiService.medicationInfo(medication, questionDto.getQuestion())), HttpStatus.OK);
+    }*/
+
+    @RequestMapping(method = RequestMethod.POST, path = {"/medication/active-ingredient"})
+    public ResponseEntity<String> getActiveIngredient(@RequestBody Map<String, String> payload) {
+        String medicineName = payload.get("name");
+
+        // Prompt para o ChatGPT
+        String prompt = "Responde apenas com o(s) nome(s) do(s) princípio(s) ativo(s) em inglês (nome usado nos EUA) "
+                + "do medicamento \"" + medicineName + "\". "
+                + "Não escrevas mais nada, sem frases, só os nomes separados por vírgula.";
+
+        String activeIngredient = chatClient
+                .call(new Prompt(prompt))
+                .getResult()
+                .getOutput()
+                .getContent()
+                .trim();
+
+        return ResponseEntity.ok(activeIngredient);
     }
+
 
 
 
@@ -103,5 +125,10 @@ public class RestAiController {
     @Autowired
     public void setGenerationToAnswerDto(GenerationToAnswerDto generationToAnswerDto) {
         this.generationToAnswerDto = generationToAnswerDto;
+    }
+
+    @Autowired
+    public void setChatClient(ChatClient chatClient) {
+        this.chatClient = chatClient;
     }
 }

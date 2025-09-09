@@ -10,4 +10,6 @@ public interface AiService {
     Generation info(String question);
 
     Generation medicationInfo(Medication medication, String question);
+
+    String getActiveIngredient(String question);
 }

@@ -55,7 +55,7 @@ public class AiServiceImpl implements AiService {
     @Override
     public Generation info(String question) {
 
-        String query = activeIngredient(question);
+        String query = getActiveIngredient(question);
 
         String result = null;
 
@@ -75,7 +75,7 @@ public class AiServiceImpl implements AiService {
         return chatClient.call(response).getResult();
     }
 
-    private String activeIngredient (String question){
+    public String getActiveIngredient (String question){
 
         PromptTemplate ragPrompt = new PromptTemplate(ragPromptTemplate);
         Prompt prompt = ragPrompt.create(Map.of(

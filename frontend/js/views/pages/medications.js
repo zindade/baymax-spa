@@ -1,14 +1,22 @@
+import { renderSearchBar } from "/js/views/components/medication-info/medication-search.js";
+import { div } from "/js/views/components/commons/div.js";
+
+
+
+
+
 export default function renderMedications() {
-  return `
-    <div class="search-section">
-      <h3>Medication Search</h3>
-      <form id="searchForm">
-        <div class="form-group">
-          <input type="search" id="med" placeholder="Type a medication name...">
-          <button type="submit">Search</button>
-        </div>
-      </form>
-      <div id="result" class="result-box"></div>
-    </div>
-  `;
+  const container = div(["medications-page"]);
+
+  // barra de pesquisa
+  const searchBar = renderSearchBar();
+  container.appendChild(searchBar);
+
+  // div para resultados (fica por baixo da barra)
+  const resultsDiv = div(["results-section"]);
+  resultsDiv.id = "results";
+  container.appendChild(resultsDiv);
+
+  
+    return container;
 }
