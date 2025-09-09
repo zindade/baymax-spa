@@ -182,5 +182,28 @@ footer {
   align-items: center;   
 }
 
+.search-section {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+.results-section {
+  margin-top: 20px;
+}
+
+.result-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.result-card h4 {
+  margin-top: 0;
+  color: #2c3e50;
+}
 
 

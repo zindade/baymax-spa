@@ -1,37 +1,32 @@
-
-
 import { div } from "/js/views/components/commons/div.js";
 
 export function renderMedicationInfo(data) {
-  let resultsDiv = document.getElementById("results");
-  if (!resultsDiv) {
-    resultsDiv = div(["result-box"]);
-    resultsDiv.id = "results";
-    document.querySelector(".search-section").appendChild(resultsDiv);
-  }
+  const resultsDiv = document.getElementById("results");
 
-  resultsDiv.innerHTML = "";
+  resultsDiv.innerHTML = "<h3>Results</h3>";
 
   if (data.results) {
     data.results.forEach((drug, index) => {
-      const list = document.createElement("ul");
-      list.innerHTML = `<h4>Resultado ${index + 1}</h4>`;
-      
-      for (const key in drug) {
-        let value = drug[key];
-        if (Array.isArray(value)) {
-          value = value.join(", ");
-        } else if (typeof value === "object" && value !== null) {
-          value = JSON.stringify(value, null, 2);
-        }
-        const li = document.createElement("li");
-        li.innerHTML = `<b>${key}:</b> ${value}`;
-        list.appendChild(li);
-      }
+      const card = document.createElement("div");
+      card.className = "result-card";
 
-      resultsDiv.appendChild(list);
+      const brand = drug.openfda?.brand_name?.join(", ") || "N/A";
+      const generic = drug.openfda?.generic_name?.join(", ") || "N/A";
+      const purpose = drug.purpose ? drug.purpose.join(" ") : "N/A";
+      const dosage = drug.dosage_and_administration ? drug.dosage_and_administration.join(" ") : "N/A";
+      const warnings = drug.warnings ? drug.warnings.join(" ") : "N/A";
+
+      card.innerHTML = `
+        <h4>${brand}</h4>
+        <p><b>Generic name:</b> ${generic}</p>
+        <p><b>Purpose:</b> ${purpose}</p>
+        <p><b>Dosage:</b> ${dosage}</p>
+        <p><b>Warnings:</b> ${warnings}</p>
+      `;
+
+      resultsDiv.appendChild(card);
     });
   } else {
-    resultsDiv.innerHTML = "<p>No results found</p>";
+    resultsDiv.innerHTML += "<p>No results found</p>";
   }
 }
