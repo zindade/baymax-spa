@@ -1,0 +1,7 @@
+
+
+
+function handleBaymaxResponse(response){
+
+
+}

@@ -1,10 +1,11 @@
+import { handleBaymaxQuestion } from "/js/views/components/baymax-resp/handle-baymax-question.js";
 
 export default function renderHome() {
   
   const homeContainer = document.createElement("div");
   homeContainer.className = "home-container";
 
-  const searchSection = document.createElement("div");
+  const searchSection = document.createElement("form");
   searchSection.className = "search-section";
 
   const heading = document.createElement("h1");
@@ -22,8 +23,9 @@ export default function renderHome() {
   input.type = "text";
   input.placeholder = "Insert your text...";
 
-  const btn = document.createElement("btn");
+  const btn = document.createElement("button");
   btn.className = "search-btn";
+  btn.type = "submit"
   btn.textContent = '➤';
 
   searchBox.appendChild(input)
@@ -33,7 +35,18 @@ export default function renderHome() {
   searchSection.appendChild(paragraph);
   searchSection.appendChild(searchBox);
 
+  const responseContainer = document.createElement("p");
+  responseContainer.id = "baymax-response";
+  searchSection.appendChild(responseContainer);
+
   homeContainer.appendChild(searchSection);
+
+  btn.addEventListener("click", async (e) => {
+    e.preventDefault();
+    const question = input.value;
+    const answer = await handleBaymaxQuestion(question);
+    responseContainer.textContent = answer || "No response from Baymax.";
+  });
 
   return homeContainer;
 
