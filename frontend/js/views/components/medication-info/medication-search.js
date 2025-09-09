@@ -40,15 +40,23 @@ export function renderSearchBar(){
       body: JSON.stringify({ name: medName })
     });
 
-    const activeIngredient = await response.text();
+    const activeIngredient = await response.json();
+
+    const firstelement = activeIngredient[0];
+
+    console.log(firstelement);
 
     
-    const fdaUrl = `https://api.fda.gov/drug/label.json?search=active_ingredient:${activeIngredient}&limit=5`;
+    const fdaUrl = `https://api.fda.gov/drug/label.json?search=active_ingredient:${firstelement}&limit=5`;
     const fdaResponse = await fetch(fdaUrl);
     const fdaData = await fdaResponse.json();
 
-    renderMedicationInfo(fdaData);
+    renderMedicationInfo(fdaData, activeIngredient, medName);
   });
 
     return container;
+}
+
+function getIngredientsData(){
+    
 }
