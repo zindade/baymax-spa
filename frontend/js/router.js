@@ -6,13 +6,17 @@ function getPath() {
 
 export function render(path) {
   const content = document.getElementById("content");
+  content.innerHTML = ""; 
 
-  const page = routes[path]; 
+  const page = routes[path];
   if (page) {
-    content.innerHTML = page();
+    const element = page(); 
+    content.appendChild(element); 
   } else {
     content.innerHTML = "<h2>Page not found</h2>";
   }
 }
 
 export { getPath };
+
+
