@@ -23,7 +23,7 @@
 hs_err_pid*
 replay_pid*
 
-
+/LlaVA-Med/
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/bootstrap/**/target/
