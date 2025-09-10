@@ -86,10 +86,10 @@ The API is now available at:
 }```
 
 
-```curl -X POST "http://localhost:8000/v1/chat/completions" \
-  -H "Content-Type: application/json" \
+```curl -X POST "http://localhost:8000/v1/chat/completions" 
+  -H "Content-Type: application/json" 
   -d "{
-    \"model\": \"llava-med-v1.5-mistral-7b\",
-    \"messages\": [{\"role\": \"user\", \"content\": \"Identify the pill in this image\"}],
-    \"images\": [\"data:image/jpeg;base64,${IMG_BASE64}\"]
+    "model": "llava-med-v1.5-mistral-7b",
+    "messages": [{"role": "user", "content": "Identify the pill in this image"}],
+    "images": ["data:image/jpeg;base64,${IMG_BASE64}"]
   }```
