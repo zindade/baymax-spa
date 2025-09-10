@@ -49,14 +49,14 @@ You’ll need three processes: controller, model worker, and API server.
 1. Start the Controller
 `python -m llava.serve.controller --host 0.0.0.0 --port 10000`
 
-2. `Start the Model Worker
+2. ```Start the Model Worker
 python -m llava.serve.model_worker \
   --host 0.0.0.0 \
   --controller http://localhost:10000 \
-  --port 40000 \
+  --port 40000 
   --worker http://localhost:40000 \
   --model-path ./llava-med-7b \
-  --multi-modal`
+  --multi-modal```
 
 3. Start the API Server
 `python -m llava.serve.openai_api_server --host 0.0.0.0 --port 8000`
@@ -77,19 +77,19 @@ The API is now available at:
 ## Wrap as data URI
 `img_uri = f"data:image/jpeg;base64,{img_b64}"`
 
-`payload = {
+```payload = {
     "model": "llava-med-v1.5-mistral-7b",
     "messages": [
         {"role": "user", "content": "What medication is this?"}
     ],
     "images": [img_uri]
-}`
+}```
 
 
-`curl -X POST "http://localhost:8000/v1/chat/completions" \
+```curl -X POST "http://localhost:8000/v1/chat/completions" \
   -H "Content-Type: application/json" \
   -d "{
     \"model\": \"llava-med-v1.5-mistral-7b\",
     \"messages\": [{\"role\": \"user\", \"content\": \"Identify the pill in this image\"}],
     \"images\": [\"data:image/jpeg;base64,${IMG_BASE64}\"]
-  }`
+  }```
