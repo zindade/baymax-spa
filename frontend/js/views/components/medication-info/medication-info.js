@@ -1,9 +1,9 @@
 import { div } from "/js/views/components/commons/div.js";
 
-export function renderMedicationInfo(data) {
+export function renderMedicationInfo(data, ingredients, medName) {
   const resultsDiv = document.getElementById("results");
 
-  resultsDiv.innerHTML = "<h3>Results</h3>";
+  resultsDiv.innerHTML = `<p>${medName} contém ${ingredients.length} princípio(s) ativo(s): ${ingredients.join(", ")}</p>`;
 
   if (data.results) {
     data.results.forEach((drug, index) => {

@@ -21,8 +21,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * A REST API AI Controller responsible for rendering AI responses
@@ -91,7 +93,7 @@ public class RestAiController {
     }*/
 
     @RequestMapping(method = RequestMethod.POST, path = {"/medication/active-ingredient"})
-    public ResponseEntity<String> getActiveIngredient(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<List<String>> getActiveIngredient(@RequestBody Map<String, String> payload) {
         String medicineName = payload.get("name");
 
         // Prompt para o ChatGPT
@@ -99,14 +101,18 @@ public class RestAiController {
                 + "do medicamento \"" + medicineName + "\". "
                 + "Não escrevas mais nada, sem frases, só os nomes separados por vírgula.";
 
-        String activeIngredient = chatClient
+        String result = chatClient
                 .call(new Prompt(prompt))
                 .getResult()
                 .getOutput()
                 .getContent()
                 .trim();
 
-        return ResponseEntity.ok(activeIngredient);
+        List<String> activeIngredients =  Arrays.stream(result.split(","))
+                .map(String::trim)
+                .toList();
+
+        return ResponseEntity.ok(activeIngredients);
     }
 
 
