@@ -1,42 +1,66 @@
 export default function renderLearnMore() {
-  return `
-    <div class="learnmore-container">
-      
-      <h1>About the Baymax Project</h1>
-      
-      <div class="baymax-img">
-        <img src="../assets/learnmore.png" alt="Learn More" />
-      </div>
+  const container = document.createElement("div");
+  container.className = "learnMore-container";
 
-      <section class="learnmore-section">
-        <h2>What is this project?</h2>
-        <p>
-          This is a final assignment for <strong>Code for All</strong>, where we created a
-          Single Page Application (SPA) inspired by Baymax. The goal is to combine a 
-          <strong>frontend SPA</strong> with a <strong>REST API backend</strong> that provides 
-          medication data.
-        </p>
-      </section>
+  const heading = document.createElement("h1");
+  heading.textContent = "Learn About Health Professionals";
+  container.appendChild(heading);
 
-      <section class="learnmore-section">
-        <h2>How does it work?</h2>
-        <ol>
-          <p1>Users can search for a medication in the search box.<br></p1>
-          <p2>The request is sent to the backend (REST API). <br></p2>
-          <p3>The backend responds with details (usage, side effects, warnings).<br></p3>
-          <p4>The frontend shows the results in a friendly Baymax-like way.</p4>
-        </ol>
-      </section>
+  const description = document.createElement("p");
+  description.textContent = "Baymax can provide you with information about different healthcare professionals, powered by Wikipedia.";
+  container.appendChild(description);
 
-      <section class="learnmore-section">
-        <h2>Why Baymax?</h2>
-        <p>
-          Baymax is a symbol of <strong>healthcare and empathy</strong>, making it a perfect 
-          inspiration for a project that aims to simplify healthcare information 
-          and make it more accessible to users.
-        </p>
-      </section>
 
-    </div>
-  `;
+  const professionals = ["Doctor", "Pharmacist", "Nurse", "Therapist"];
+
+  const listDiv = document.createElement("div");
+  listDiv.className = "professional-list";
+  container.appendChild(listDiv);
+
+ 
+  async function fetchWikiInfo(topic) {
+    try {
+      const response = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${topic}`);
+      if (!response.ok) {
+        throw new Error("Erro ao buscar dados da Wikipedia");
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+
+ 
+  professionals.forEach(async (prof) => {
+    const data = await fetchWikiInfo(prof);
+
+    const card = document.createElement("div");
+    card.className = "professional-card";
+
+    if (data) {
+      const h3 = document.createElement("h3");
+      h3.textContent = data.title;
+
+      const p = document.createElement("p");
+      p.textContent = data.extract || "No description available.";
+
+      card.appendChild(h3);
+      card.appendChild(p);
+
+      if (data.thumbnail && data.thumbnail.source) {
+        const img = document.createElement("img");
+        img.src = data.thumbnail.source;
+        img.alt = data.title;
+        img.style.width = "100px";
+        card.appendChild(img);
+      }
+    } else {
+      card.textContent = `Could not load info about ${prof}`;
+    }
+
+    listDiv.appendChild(card);
+  });
+
+  return container;
 }
