@@ -109,8 +109,6 @@ export default function renderLearnMore() {
 
   const { el: mapEl, ready } = createLeafletMap({
     height: 500,
-    center: [39.5, -8.0],
-    zoom: 6
   });
   container.appendChild(mapEl);
 

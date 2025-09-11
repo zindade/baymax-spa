@@ -13,5 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("hashchange", () => {
     render(getPath());
   });
+
+  self.addEventListener('fetch', function(event) {
+  if (event.request.url.includes('tile.openstreetmap.org')) {
+    event.respondWith(
+      caches.open('osm-tiles').then(function(cache) {
+        return cache.match(event.request).then(function(response) {
+          return response || fetch(event.request).then(function(networkResponse) {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          });
+        });
+      })
+    );
+  }
+});
 });
 
