@@ -282,6 +282,13 @@ body.chat-view-active #content {
   0%, 100% { transform: scaleY(1); } /* Olho aberto */
   50% { transform: scaleY(0.1); }   /* Olho fechado */
 }
+#map, .leaflet-container {
+  min-height: 500px;
+}
+.event-consulta {
+  border-left: 4px solid #0d6efd !important; /* realce azul */
+  font-weight: 600;
+}
 
 /* Classe que vamos adicionar via JS para ativar as animações */
 .animate-goodbye .baymax-logo {
