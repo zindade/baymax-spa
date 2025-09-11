@@ -74,37 +74,4 @@ python -m llava.serve.model_worker \
   --port 8000
 ```
 
-3. Start the API Server
-`python -m llava.serve.openai_api_server --host 0.0.0.0 --port 8000`
-
-
-The API is now available at:
-
-`http://localhost:8000/v1/chat/completions`
-
-# 🔗 Usage Examples
-
-## Encode an image to base64, Wrap as data URI
-```img_uri = f"data:image/jpeg;base64,{img_b64}"```
-
-```
-payload = {  
-    "model": "llava-med-v1.5-mistral-7b", 
-    "messages": [ 
-        {"role": "user", "content": "What medication is this?"} 
-    ], 
-    "images": [img_uri] 
-  }
-```
-
- 
-```
-curl -X POST "http://localhost:8000/v1/chat/completions" 
-  -H "Content-Type: application/json" 
-  -d "{
-    "model": "llava-med-v1.5-mistral-7b",
-    "messages": [{"role": "user", "content": "Identify the pill in this image"}],
-    "images": ["data:image/jpeg;base64,${IMG_BASE64}"]
-  }
-```
 
