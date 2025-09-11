@@ -8,11 +8,11 @@ import { div } from "/js/views/components/commons/div.js";
 export default function renderMedications() {
   const container = div(["medications-page"]);
 
-  // barra de pesquisa
+ 
   const searchBar = renderSearchBar();
   container.appendChild(searchBar);
 
-  // div para resultados (fica por baixo da barra)
+  
   const resultsDiv = div(["results-section"]);
   resultsDiv.id = "results";
   container.appendChild(resultsDiv);
