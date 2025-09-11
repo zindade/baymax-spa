@@ -1,4 +1,4 @@
-// js/views/components/button.js
+
 export default function button(text, onClick, additionalClass = "") {
   const btn = document.createElement("button");
   btn.textContent = text;

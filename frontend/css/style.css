@@ -214,4 +214,7 @@ footer {
   margin: 10px auto;
   border-radius: 5px;
 }
+#map, .leaflet-container {
+  min-height: 500px;
+}
 
