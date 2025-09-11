@@ -1,17 +1,9 @@
 # 🧪 LLaVA-Med Self-Hosted API
 
 This repository provides instructions to self-host **[LLaVA-Med](https://github.com/microsoft/LLaVA-Med)**, a multimodal model fine-tuned for biomedical and medical tasks.  
-You can run it locally with GPU support and interact via an **OpenAI-compatible API**, including sending **base64-encoded images** (useful for web or mobile uploads).
+You can run it locally with GPU support and interact via an **API**, including sending **base64-encoded images** (useful for web or mobile uploads).
 
----
 
-## 🚀 Features
-- OpenAI-compatible API (`/v1/chat/completions`)
-- Supports text + image (file path, URL, or base64)
-- Can be integrated into Flask, FastAPI, or any existing client
-- Local, private, and GPU-accelerated
-
----
 
 ## 🛠 Requirements
 - Python **3.10+**
@@ -58,7 +50,8 @@ You’ll need three processes: controller, model worker, and API server.
 1. Start the Controller
 `python -m llava.serve.controller --host 0.0.0.0 --port 10000`
 
-2. Start the Model Worker
+2. Start the Model Worker  
+
 ```
 python -m llava.serve.model_worker \
   --host 0.0.0.0 \
