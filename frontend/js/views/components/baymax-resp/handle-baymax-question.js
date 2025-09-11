@@ -13,10 +13,11 @@ async function handleBaymaxQuestion(question) {
     }
 
     
-    const baymaxActualResponse = await response.text();
+    const baymaxActualResponse = await response.json();
+    const content = baymaxActualResponse.output?.content || "";
 
-    console.log("Baymax says:", baymaxActualResponse);
-    return baymaxActualResponse;
+    console.log("Baymax says:", content);
+    return content;
   } catch (error) {
     console.error("Error talking to Baymax:", error);
     return null;
