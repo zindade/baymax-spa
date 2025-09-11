@@ -217,4 +217,8 @@ footer {
 #map, .leaflet-container {
   min-height: 500px;
 }
+.event-consulta {
+  border-left: 4px solid #0d6efd !important; /* realce azul */
+  font-weight: 600;
+}
 
