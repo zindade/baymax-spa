@@ -4,6 +4,7 @@ export function createNavbarDOM() {
     { href: '#/medications', text: 'Medications' },
     { href: '#/learnMore', text: 'Learn More' },
     { href: '#/aboutUs', text: 'About Us' },
+    {href: '#/schedule', text: 'Schedule'}
   ];
 
   const headerContainer = document.getElementById("header");

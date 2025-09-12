@@ -66,9 +66,7 @@ body::before {
         background-color: rgba(255, 255, 255, 0.15);
     }
 
-    #chat-container {
-      
-    }
+  
     /* ---- LOGO BAYMAX COM AURA ---- */
     .baymax-logo-container {
         position: relative;
@@ -120,6 +118,8 @@ body::before {
     }
 
     /* ---- TÍTULOS ---- */
+
+
     .welcome-title {
         font-size: 3rem;
         font-weight: 600;
@@ -127,7 +127,7 @@ body::before {
     .welcome-subtitle {
         font-size: 1.25rem;
         color: #6c757d;
-        margin-bottom: 40px;
+        margin-bottom: 0px;
     }
 
     /* ---- BARRA DE PESQUISA ---- */
@@ -218,16 +218,16 @@ body::before {
     }
 
 
-    /* Itens que só aparecem na vista inicial e devem desaparecer */
+   
 .initial-view-item {
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-/* Quando o chat estiver ativo, escondemos os itens iniciais */
+
 body.chat-view-active .initial-view-item {
   opacity: 0;
   transform: scale(0.9);
-  /* Usamos display: none; após a transição para remover o espaço que ocupam */
+  
   animation: hide-after-transition 0.5s forwards;
 }
 
@@ -237,20 +237,20 @@ body.chat-view-active .initial-view-item {
   }
 }
 
-/* O container do input no estado inicial */
+
 .health-query-container {
   transition: all 0.5s ease-in-out;
 }
 
-/* O container do input QUANDO O CHAT ESTIVER ATIVO */
+
 body.chat-view-active .health-query-container {
-  position: fixed; /* Fixo na janela de visualização */
-  bottom: 20px;    /* A 20px do fundo */
-  left: 50%;       /* Alinhado ao centro horizontalmente */
-  transform: translateX(-50%); /* Ajuste fino para centralização perfeita */
-  width: 90%;      /* Largura no modo chat */
-  max-width: 700px;/* Largura máxima */
-  z-index: 100;    /* Garante que fica por cima de outros elementos */
+  position: fixed; 
+  bottom: 20px;    
+  left: 50%;       
+  transform: translateX(-50%); 
+  width: 90%;      
+  max-width: 700px;
+  z-index: 100;    
   margin: 0;
 }
 
@@ -276,18 +276,19 @@ body.chat-view-active #content {
   line-height: 1.5;
 }
 
+
 .user-message {
   background-color: #e62e41;
   color: white;
   border-bottom-right-radius: 4px;
-  align-self: flex-end; /* Alinha a mensagem do utilizador à direita */
+  align-self: flex-end; 
 }
 
 .bot-message {
   background-color: #fff;
   color: #333;
   border-bottom-left-radius: 4px;
-  align-self: flex-start; /* Alinha a mensagem do bot à esquerda */
+  align-self: flex-start; 
 }
 
 @keyframes baymaxWobble {
@@ -298,26 +299,26 @@ body.chat-view-active #content {
   100% { transform: rotate(0deg); }
 }
 
-/* Animação para piscar o olho */
+
 @keyframes eyeBlink {
-  0%, 100% { transform: scaleY(1); } /* Olho aberto */
-  50% { transform: scaleY(0.1); }   /* Olho fechado */
+  0%, 100% { transform: scaleY(1); } 
+  50% { transform: scaleY(0.1); }   
 }
 #map, .leaflet-container {
   min-height: 500px;
 }
 .event-consulta {
-  border-left: 4px solid #0d6efd !important; /* realce azul */
+  border-left: 4px solid #0d6efd !important;
   font-weight: 600;
 }
 
-/* Classe que vamos adicionar via JS para ativar as animações */
+
 .animate-goodbye .baymax-logo {
-  animation: baymaxWobble 0.8s ease-in-out forwards;
+  animation: baymaxWobble 1.2s ease-in-out forwards;
 }
 
 .animate-goodbye .baymax-logo .dot:first-child {
-  /* O olho pisca depois do abanão começar */
-  animation: eyeBlink 0.2s ease-in-out forwards;
-  animation-delay: 0.5s;
+  
+  animation: eyeBlink 0.4s ease-in-out forwards;
+  animation-delay: 0.9s;
 }
