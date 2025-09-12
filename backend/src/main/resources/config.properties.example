@@ -16,3 +16,4 @@ ai.rag_documents=classpath:/ai/rag/*
 ai.rag_prompt_template=classpath:/ai/templates/rag-prompt-template.st
 ai.rag_number_results=4
 ai.function_prompt_template=classpath:/ai/templates/function-prompt-template.st
+ai.prompt_template=classpath:/ai/templates/prompt_template.st
