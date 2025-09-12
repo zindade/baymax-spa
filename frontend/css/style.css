@@ -8,12 +8,11 @@
 
 body {
   position: relative;
-  background-color: #dfe9e3;
   color: #333;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   padding-top: 90px;
   height: 100dvh;
-  
+  overflow: hidden;
 }
 
 body::before {
@@ -28,6 +27,13 @@ body::before {
   z-index: -1;
 }
 
+main {
+  height: 100%;
+}
+
+.card {
+  background-color: #e9f5eea6;
+}
 
     /* ---- NAVBAR ---- */
     .navbar-custom {
@@ -150,7 +156,7 @@ body::before {
     }
     .health-query-btn {
         position: absolute;
-        right: 7px;
+        right: 25px;
         top: 50%;
         transform: translateY(-50%);
         width: 46px;
@@ -178,7 +184,7 @@ body::before {
         max-width: 500px;
         margin: 30px auto 0 auto;
         padding: 20px;
-        background-color:#EAF4F5;
+        background-color:#fff;
         border-radius: 20px;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
@@ -217,6 +223,9 @@ body::before {
         bottom: 0px;
     }
 
+    .avatar {
+      width: 100%;
+    }
 
    
 .initial-view-item {
@@ -239,6 +248,7 @@ body.chat-view-active .initial-view-item {
 
 
 .health-query-container {
+  padding: 1em;
   transition: all 0.5s ease-in-out;
 }
 
@@ -249,7 +259,7 @@ body.chat-view-active .health-query-container {
   left: 50%;       
   transform: translateX(-50%); 
   width: 90%;      
-  max-width: 700px;
+  max-width: 70%;
   z-index: 100;    
   margin: 0;
 }
@@ -265,8 +275,21 @@ body.chat-view-active #content {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  max-width: 700px;
-  margin: 20px auto;
+  width: 70%;
+  margin: 0px auto;
+  overflow: auto;
+  height: 90%;
+  padding: 1em;
+}
+
+@media (max-width: 1024px) {
+  #content {
+    max-width: 100%;
+  }
+
+  div.w-50 {
+    width: 100%!important;
+  }
 }
 
 .chat-message {
@@ -285,10 +308,16 @@ body.chat-view-active #content {
 }
 
 .bot-message {
-  background-color: #fff;
+  background-color: #e9f5eea6;
   color: #333;
   border-bottom-left-radius: 4px;
   align-self: flex-start; 
+}
+
+.chat-message, .health-query-input {
+  box-shadow: 14px 22px 27px -20px rgba(0,0,0,0.59);
+  -webkit-box-shadow: 14px 22px 27px -20px rgba(0,0,0,0.59);
+  -moz-box-shadow: 14px 22px 27px -20px rgba(0,0,0,0.59);
 }
 
 @keyframes baymaxWobble {
@@ -321,4 +350,40 @@ body.chat-view-active #content {
   
   animation: eyeBlink 0.4s ease-in-out forwards;
   animation-delay: 0.9s;
+}
+
+
+@media (max-width: 1024px) {
+  #content {
+    max-width: 100%;
+    width: 100%;
+    margin: 0px!important;
+  }
+
+  div.w-50 {
+    width: 100%!important;
+  }
+  div.p-5 {
+    padding: 1em!important;
+  }
+  .health-query-container {
+    width: 100%!important;
+    max-width: 90%!important;
+  }
+
+  .welcome-title {
+    font-size: 1.5em;
+  }
+  .main-footer>p {
+    margin-bottom: 3px;
+  }
+
+  .main-footer {
+    padding: 10px 0 0 10px;
+  }
+
+  .aboutus-bg {
+    padding-top: 1.5em!important;
+    margin-top: 0px!important;
+  }
 }

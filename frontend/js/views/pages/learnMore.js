@@ -103,7 +103,7 @@ export default function renderLearnMore() {
   });
 
   const mapTitle = document.createElement("h2");
-  mapTitle.className = "text-center my-5";
+  mapTitle.className = "text-center";
   mapTitle.textContent = "Hospitals and Pharmacies in Portugal";
   container.appendChild(mapTitle);
 
