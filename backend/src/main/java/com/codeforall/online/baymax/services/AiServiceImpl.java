@@ -3,26 +3,16 @@ package com.codeforall.online.baymax.services;
 import com.codeforall.online.baymax.functions.MedicationInfoFunction;
 import com.codeforall.online.baymax.model.Medication;
 import org.springframework.ai.chat.ChatClient;
-import org.springframework.ai.chat.messages.Media;
 import org.springframework.ai.chat.Generation;
-import org.springframework.ai.chat.messages.ChatMessage;
 import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.messages.SystemMessage;
-import org.springframework.ai.chat.messages.UserMessage;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
 import org.springframework.ai.model.function.FunctionCallbackWrapper;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MimeType;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -61,10 +51,7 @@ public class AiServiceImpl implements AiService {
 
         if (query != "UNKNOWN"){
             String url = FDA_API + query + "&limit=10";
-
             result = restTemplate.getForObject(url, String.class);
-
-
         }
 
         PromptTemplate promptTemp = new PromptTemplate(promptTemplate);

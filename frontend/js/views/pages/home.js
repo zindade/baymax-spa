@@ -8,7 +8,8 @@ export default function renderHome() {
 
   // --- 1. Criação dos Elementos (como você já tinha) ---
   const container = document.createElement('div');
-  container.className = 'container mt-5 text-center';
+  container.className = 'container mt-5 text-center card p-5';
+  container.id = 'chat-container'
 
   // Adicionamos a classe 'initial-view-item' aos elementos que devem desaparecer
   const logoContainer = document.createElement('div');
@@ -104,9 +105,12 @@ export default function renderHome() {
       chatHasStarted = true; // Marca que o processo começou para evitar duplos cliques
       
       const logoContainer = document.querySelector('.baymax-logo-container');
+      const chatCard = document.getElementById("chat-container");
       
       // 1. Adiciona a classe para iniciar a animação do Baymax
       logoContainer.classList.add('animate-goodbye');
+      chatCard.classList.remove("p-5");
+      chatCard.classList.add("border-0");
 
       // 2. "Ouve" o evento que avisa quando a animação terminou
       logoContainer.addEventListener('animationend', () => {
