@@ -28,12 +28,19 @@ public class AiServiceImpl implements AiService {
 
     @Value("${ai.rag_prompt_template}")
     private Resource ragPromptTemplate;
+
     @Value("${ai.prompt_template}")
     private Resource promptTemplate;
+
+    @Value("${ai.prompt_template_fda}")
+    private Resource promptTemplateFda;
+
     @Value("${ai.function_prompt_template}")
     private Resource functionPromptTemplate;
+
     @Value("${ai.json_prompt_template}")
     private Resource jsonPromptTemplate;
+
     private RestTemplate restTemplate = new RestTemplate();
 
     private ChatClient chatClient;
@@ -41,23 +48,23 @@ public class AiServiceImpl implements AiService {
     private String FDA_API = "https://api.fda.gov/drug/label.json?search=active_ingredient:";
 
 
-
     @Override
     public Generation info(String question) {
 
         String query = getActiveIngredient(question);
 
-        String result = null;
-
-        if (query != "UNKNOWN"){
+        Prompt response = null;
+        try {
             String url = FDA_API + query + "&limit=10";
-            result = restTemplate.getForObject(url, String.class);
+            String result = restTemplate.getForObject(url, String.class);
+            PromptTemplate promptTemp = new PromptTemplate(promptTemplateFda);
+            response = promptTemp.create(Map.of(
+                    "input", question, "data", result));
+        } catch (Exception e) {
+            PromptTemplate promptTemp = new PromptTemplate(promptTemplate);
+            response = promptTemp.create(Map.of(
+                    "input", question));
         }
-
-        PromptTemplate promptTemp = new PromptTemplate(promptTemplate);
-        Prompt response = promptTemp.create(Map.of(
-                "input", question, "data", result));
-
 
         return chatClient.call(response).getResult();
     }
@@ -67,8 +74,6 @@ public class AiServiceImpl implements AiService {
         PromptTemplate ragPrompt = new PromptTemplate(ragPromptTemplate);
         Prompt prompt = ragPrompt.create(Map.of(
                 "input", question));
-
-
 
         String content = chatClient.call(prompt).getResult().getOutput().getContent();
         String query = content.trim().replace(" ", "+");
