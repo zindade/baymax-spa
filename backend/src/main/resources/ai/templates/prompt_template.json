@@ -1,9 +1,9 @@
 {
   "model": "llava-med",
-  "prompt": "[INST] \n\n<image>\nWhat do you identify in the image? ${QUESTION}  [/INST]",
+  "prompt": "[INST] \n\n<image>\n<<SYS>>Identify the medication in the image, if any. Respond with the **active ingredient**. Do NOT mention the image.<</SYS>> ${QUESTION} [/INST]",
   "temperature": 0.1,
-  "top_p": 0.5,
-  "max_new_tokens": 1000,
+  "top_p": 0.3,
+  "max_new_tokens": 5000,
   "stop": "</s>",
   "images": ["${IMAGE_BASE64}"]
 }
