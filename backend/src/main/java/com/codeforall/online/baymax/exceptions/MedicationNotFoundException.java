@@ -5,10 +5,10 @@ import com.codeforall.online.baymax.errors.ErrorMessage;
 /**
  * Thrown to indicate that the customer was not found
  */
-public class MedicationNotFoundException extends JavaBankException {
+public class MedicationNotFoundException extends BaymaxException {
 
     /**
-     * @see JavaBankException#JavaBankException(String)
+     * @see BaymaxException#BaymaxException(String)
      */
     public MedicationNotFoundException() {
         super(ErrorMessage.MEDICATION_NOT_FOUND);
