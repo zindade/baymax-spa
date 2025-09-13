@@ -88,7 +88,6 @@ public class RestAiController {
     public ResponseEntity<List<String>> getActiveIngredient(@RequestBody Map<String, String> payload) {
         String medicineName = payload.get("name");
 
-        // Prompt para o ChatGPT
         String prompt = "Responde apenas com o(s) nome(s) do(s) princípio(s) ativo(s) em inglês (nome usado nos EUA) "
                 + "do medicamento \"" + medicineName + "\". "
                 + "Não escrevas mais nada, sem frases, só os nomes separados por vírgula.";

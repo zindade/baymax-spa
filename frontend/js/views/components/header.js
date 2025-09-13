@@ -53,23 +53,40 @@ export function createNavbarDOM() {
     const li = document.createElement('li');
     li.className = 'nav-item';
     const a = document.createElement('a');
-    a.className = 'nav-link';
+    a.className = 'nav-link ';
     a.href = item.href;
     a.textContent = item.text;
     a.setAttribute('data-link', '');
+    
     li.appendChild(a);
     ul.appendChild(li);
   });
-  
-  // Juntar as peças
+
+
   collapseDiv.appendChild(ul);
   container.appendChild(brandLink);
   container.appendChild(button);
   container.appendChild(collapseDiv);
   nav.appendChild(container);
   
-  // Limpa o container antes de adicionar a nova navbar para evitar duplicados
   headerContainer.innerHTML = ''; 
-  // Adiciona a navbar ao container <div id="header">
+
   headerContainer.appendChild(nav);
+
+  const menuCollapse = document.getElementById('mainNav');
+
+  if (menuCollapse) {
+    
+    const navLinks = menuCollapse.querySelectorAll('.nav-link');
+
+    const bsCollapse = new bootstrap.Collapse(menuCollapse, { toggle: false });
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+            if (menuCollapse.classList.contains('show')) {
+                bsCollapse.hide();
+            }
+        });
+    });
+  }
 }
