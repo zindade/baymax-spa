@@ -105,6 +105,20 @@ public class RestAiController {
 
         return ResponseEntity.ok(activeIngredients);
     }
+    @RequestMapping(method = RequestMethod.POST, path = {"/medication/active-ingredient/{ai}"})
+    public ResponseEntity<Generation> medicamentInfo(
+            @Valid @RequestBody QuestionDto questionDto,
+            @PathVariable("ai") String ai,
+            BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Generation result = aiService.medicationInfo(ai, questionDto.getQuestion());
+
+        return ResponseEntity.ok(result);
+    }
 
 
 
