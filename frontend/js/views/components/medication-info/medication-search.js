@@ -1,14 +1,12 @@
-import { renderMedicationInfo } from "/js/views/components/medication-info/medication-info.js";
 import { elementsSelecterJson } from"/js/views/components/medication-info/medication-info.js";
 import {div} from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
-import {input} from "/js/views/components/commons/input.js"
 
 const baymaxUrl = "http://localhost:8080/baymax/api/medication/active-ingredient";
 
 export function renderSearchBar(){
 
-    const container = div(["search-section"]);
+    const container = div(["container", "mt-5", "text-center", "card", "p-5"]);
 
     const title = element("h3", [], "Medication Search");
     container.appendChild(title);
@@ -16,14 +14,19 @@ export function renderSearchBar(){
     const search_form = element ("form", [], "");
     search_form.id = "seachForm";
     
-    const form_content = div(["form-group"]);
+    const form_content = div(["health-query-container"]);
 
-    const searchInput = input("text", "med", "Type a medication name...");
-    const btn = document.createElement("button");
-    btn.type = "submit";
-    btn.textContent = "Search";
+    const input = document.createElement('input');
+    input.className = 'form-control health-query-input';
+    input.placeholder = 'Type a medication...';
+    input.id = 'med'; 
+    input.name = 'health_query'; 
+    const btn = document.createElement('button');
+    btn.className = 'btn health-query-btn';
+    btn.type = 'submit';
+    btn.innerHTML = '<i class="bi bi-arrow-right"></i>';
 
-    form_content.appendChild(searchInput);
+    form_content.appendChild(input);
     form_content.appendChild(btn);
 
     search_form.appendChild(form_content);
@@ -31,6 +34,8 @@ export function renderSearchBar(){
 
     search_form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const resultsDiv = document.getElementById("results"); 
+    resultsDiv.innerHTML = '';
 
     const medName = document.getElementById("med").value;
 
@@ -43,41 +48,50 @@ export function renderSearchBar(){
 
     const activeIngredient = await response.json();
 
-    const firstelement = activeIngredient[0];
+    console.log(activeIngredient);
 
-    console.log(firstelement);
+    for (const ingredient of activeIngredient){
 
-    
-    const fdaUrl = `https://api.fda.gov/drug/label.json?search=active_ingredient:${firstelement}&limit=1`;
-    const fdaResponse = await fetch(fdaUrl);
-    const fdaData = await fdaResponse.json();
-
-    const jsonData = await elementsSelecterJson(fdaData);
-
-    const response2 = await fetch(baymaxUrl + "/" + firstelement.toLowerCase(), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ question: JSON.stringify(jsonData) }) 
-    });
-
-    console.log(JSON.stringify(jsonData))
-
-
-    const chatResponse = await response2.json();
-    
-
-    const resultsDiv = document.getElementById("results");
-
-    resultsDiv.innerHTML = `<p>${medName} contém ${activeIngredient.length} princípio(s) ativo(s): ${activeIngredient.join(", ")}</p>
-    <p>Response of chat:  ` + marked.parse(chatResponse.output?.content || "");
+      let card = await showActiveIngredient(ingredient);
+        
+        if (card) {
+                resultsDiv.appendChild(card);
+            }
+    };
 
     container.appendChild(resultsDiv)
-    //renderMedicationInfo(fdaData, activeIngredient, medName);
+    
+    
   });
-
     return container;
 }
 
-function getIngredientsData(){
-    
+async function showActiveIngredient(ingredient){
+  
+  const fdaUrl = `https://api.fda.gov/drug/label.json?search=active_ingredient:${ingredient}&limit=1`;
+  const fdaResponse = await fetch(fdaUrl);
+  const fdaData = await fdaResponse.json();
+
+   
+  const selectedJson = await elementsSelecterJson(fdaData);
+
+  const card = document.createElement('div');
+  card.className = "container mt-5 text-center card p-5"
+
+  if (selectedJson.length === 0) {
+        card.innerHTML = `<p>No FDA information found for ingredient: ${ingredient}</p>`;
+        return card;
+    }
+
+  const response2 = await fetch(baymaxUrl + "/" + ingredient.toLowerCase(), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ question: JSON.stringify(selectedJson) }) 
+  })
+
+  const chatResponse = await response2.json();
+
+  card.innerHTML =`<p>Response of chat:  ` + marked.parse(chatResponse.output?.content || "");
+
+  return card;
 }
