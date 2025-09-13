@@ -5,12 +5,12 @@ package com.codeforall.online.baymax.exceptions;
  *
  * @see Exception
  */
-public class JavaBankException extends Exception {
+public class BaymaxException extends Exception {
 
     /**
      * @see Exception#Exception(String)
      */
-    public JavaBankException(String message) {
+    public BaymaxException(String message) {
         super(message);
     }
 }
