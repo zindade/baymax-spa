@@ -10,7 +10,7 @@ export function renderMedicationInfo(data, ingredients, medName) {
       const card = document.createElement("div");
       card.className = "result-card";
 
-      const disclaimer = data.disclaimer? data.disclamer.join(" ") : "N/A";
+      const disclaimer = data.meta.disclaimer? data.meta.disclaimer : "N/A";
       const doNotUse = drug.do_not_use ? drug.do_not_use.join(" ") : "N/A";
       const askDoctor = drug.ask_doctor ? drug.ask_doctor.join(" ") : "N/A";
       const whenUse = drug.when_using ? drug.when_using.join(" ") : "N/A";
