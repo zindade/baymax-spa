@@ -39,3 +39,27 @@ export function renderMedicationInfo(data, ingredients, medName) {
     resultsDiv.innerHTML += "<p>No results found</p>";
   }
 }
+
+export async function elementsSelecterJson(data) {
+  let json = []
+
+  if (data.results) {
+    
+    const drug = data.results[0]
+      const disclaimer = data.meta.disclaimer? "Disclaimer: " + data.meta.disclaimer : "N/A";
+      const doNotUse = drug.do_not_use ? "Do not use: " + drug.do_not_use.join(" ") : "N/A";
+      const askDoctor = drug.ask_doctor ? "Ask doctor: " + drug.ask_doctor.join(" ") : "N/A";
+      const whenUse = drug.when_using ? "When use: " + drug.when_using.join(" ") : "N/A";
+      const stopUse = drug.stop_use ? "Stop use: " + drug.stop_use.join(" ") : "N/A";
+      const route = drug.openfda && drug.openfda.route ? "Route: " + drug.openfda.route.join(" ") : "N/A";
+      const purpose = drug.purpose ? "Purpose: " + drug.purpose.join(" ") : "N/A";
+      const dosage = drug.dosage_and_administration ? "Dosage and administration: " + drug.dosage_and_administration.join(" ") : "N/A";
+      
+      json = [disclaimer, doNotUse, askDoctor, whenUse, stopUse, route, purpose, dosage];
+    
+  } else {
+    resultsDiv.innerHTML += "<p>No results found</p>";
+  }
+
+  return json;
+}
