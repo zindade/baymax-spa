@@ -57,9 +57,9 @@ export async function elementsSelecterJson(data) {
       
       json = [disclaimer, doNotUse, askDoctor, whenUse, stopUse, route, purpose, dosage];
     
-  } else {
-    resultsDiv.innerHTML += "<p>No results found</p>";
-  }
+  }else {
+        console.log("No results found in elementsSelecterJson");
+    }
 
   return json;
 }
