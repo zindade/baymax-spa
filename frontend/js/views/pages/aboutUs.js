@@ -18,7 +18,7 @@ export default function renderAboutUs() {
 
   const headingWrap = el("div", "text-center mb-5");
   const h2 = el("h2", "display-6 fw-bold mb-2");
-  h2.innerHTML = "Meet the Minds Behind Your<br>Healthcare Companion";
+  h2.innerHTML = "Meet the Baymax Team";
   headingWrap.appendChild(h2);
   wrap.appendChild(headingWrap);
 
@@ -26,7 +26,7 @@ export default function renderAboutUs() {
 
   team.forEach(m => {
     const col   = el("div", "col-12 col-sm-6 col-lg-5");
-    const card  = el("div", "card team-card text-center shadow-sm border-0 rounded-4 p-4");
+    const card  = el("div", "card team-card text-center shadow-sm border-0 rounded-4 p-4 glass");
 
     const ring  = el("div", "mx-auto avatar-ring mb-3");
     const img   = el("img", "avatar");

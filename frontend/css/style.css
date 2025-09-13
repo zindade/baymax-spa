@@ -1,9 +1,14 @@
 #header {
-  position: fixed; /* Fixa o header em relação à janela do browser */
-  top: 0;          /* Cola-o no topo */
-  left: 0;         /* Alinha-o à esquerda */
-  width: 100%;     /* Faz com que ocupe a largura toda */
-  z-index: 1030;   /* Garante que fica por cima de outros elementos (Bootstrap usa até 1020) */
+  position: fixed;
+  /* Fixa o header em relação à janela do browser */
+  top: 0;
+  /* Cola-o no topo */
+  left: 0;
+  /* Alinha-o à esquerda */
+  width: 100%;
+  /* Faz com que ocupe a largura toda */
+  z-index: 1030;
+  /* Garante que fica por cima de outros elementos (Bootstrap usa até 1020) */
 }
 
 body {
@@ -18,12 +23,15 @@ body {
 body::before {
   content: "";
   position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url(../assets/bg.png);
   background-size: cover;
   background-position: center;
-  opacity: 0.06; /* change to desired transparency */
+  opacity: 0.06;
+  /* change to desired transparency */
   z-index: -1;
 }
 
@@ -32,202 +40,230 @@ main {
 }
 
 .card {
-  background-color: #e9f5eea6;
+  background-color: #00000017;
 }
 
-    /* ---- NAVBAR ---- */
-    .navbar-custom {
-        background-color: #e62e41; /* Vermelho Baymax */
-        padding: 10px 0;
-        padding-top: 16px;
-    padding-bottom: 16px;
-    transition: padding 0.3s ease;
-    }
-    .navbar-brand-custom {
-        font-weight: bold;
-        color: white !important;
-        display: flex;
-        align-items: center;
-        font-size: 1.4rem; 
-    }
-    .navbar-brand-custom svg {
-        margin-right: 10px;
-        width: 34px;
-        height: auto;
-    }
-    
+/* ---- NAVBAR ---- */
+.navbar-custom {
+  background-color: #e62e41;
+  /* Vermelho Baymax */
+  padding: 10px 0;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  transition: padding 0.3s ease;
+}
 
-    .navbar-custom .nav-link {
-    
-        font-size: 1.1rem;
-        margin-left: 8px;
-        margin-right: 8px;
-        font-weight: 500;
-        padding: 8px 12px;
-        border-radius: 6px;
-        transition: background-color 0.2s ease-in-out;
-    }
+.navbar-brand-custom {
+  font-weight: bold;
+  color: white !important;
+  display: flex;
+  align-items: center;
+  font-size: 1.4rem;
+}
 
-    .navbar-custom .nav-link:hover {
-        background-color: rgba(255, 255, 255, 0.15);
-    }
-
-  
-    /* ---- LOGO BAYMAX COM AURA ---- */
-    .baymax-logo-container {
-        position: relative;
-        width: 150px;
-        height: 90px;
-        margin: 0 auto 30px auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .baymax-logo-container::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 250px;
-        height: 250px;
-        transform: translate(-50%, -50%);
-        background-image: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%);
-        z-index: 0;
-        opacity: 0.8;
-    }
-    .baymax-logo {
-        width: 150px;
-        height: 90px;
-        background-color: white;
-        border-radius: 50px;
-        border: 4px solid #333;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 30px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        z-index: 1;
-    }
-    .baymax-logo .dot {
-        width: 12px;
-        height: 12px;
-        background-color: #333;
-        border-radius: 50%;
-    }
-    .baymax-logo .line {
-        position: absolute;
-        left: 42px;
-        right: 42px;
-        height: 4px;
-        background-color: #333;
-    }
-
-    /* ---- TÍTULOS ---- */
+.navbar-brand-custom svg {
+  margin-right: 10px;
+  width: 34px;
+  height: auto;
+}
 
 
-    .welcome-title {
-        font-size: 3rem;
-        font-weight: 600;
-    }
-    .welcome-subtitle {
-        font-size: 1.25rem;
-        color: #6c757d;
-        margin-bottom: 0px;
-    }
+.navbar-custom .nav-link {
 
-    /* ---- BARRA DE PESQUISA ---- */
-    .health-query-container {
-        position: relative;
-        width: 70%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .health-query-input {
-        height: 60px;
-        border-radius: 50px;
-        padding-right: 70px;
-        border: 1px solid #e0e0e0;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    }
-    .health-query-input:focus {
-        box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
-        border-color: #f0a2aa;
-    }
-    .health-query-btn {
-        position: absolute;
-        right: 25px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 46px;
-        height: 46px;
-        border-radius: 50%;
-        background-color: #e62e41;
-        border: none;
-        color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 0 15px rgba(230, 46, 65, 0.7);
-        transition: background-color 0.2s ease-in-out;
-    }
-    .health-query-btn:hover {
-        background-color: #d12134;
-    }
-    .health-query-btn i {
-        font-size: 1.5rem;
-        line-height: 1;
-    }
+  font-size: 1.1rem;
+  margin-left: 8px;
+  margin-right: 8px;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s ease-in-out;
+}
 
-    /* ---- CAIXA DE SUGESTÕES ---- */
-    .suggestion-box {
-        max-width: 500px;
-        margin: 30px auto 0 auto;
-        padding: 20px;
-        background-color:#fff;
-        border-radius: 20px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-    .suggestion-box p {
-        margin-bottom: 15px;
-        font-weight: 500;
-        color: #555;
-    }
-    .suggestion-pill {
-        display: inline-block;
-        padding: 8px 15px;
-        margin: 5px;
-        background-color: white;
-        border-radius: 50px;
-        text-decoration: none;
-        color: #333;
-        font-size: 0.9rem;
-        border: 1px solid #ddd;
-        transition: all 0.2s ease;
-    }
-    .suggestion-pill:hover {
-        background-color: #e62e41;
-        color: white;
-        border-color: #e62e41;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
+.navbar-custom .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
 
-    /* ---- RODAPÉ ---- */
-    .main-footer {
-        margin-top: 20px;
-        padding: 1em;
-        color: #000;
-        text-align: center;
-        position: fixed;
-        bottom: 0px;
-    }
+#chat-card {
+  height: 100%;
+  justify-content: center;
+}
 
-    .avatar {
-      width: 100%;
-    }
+.glass {
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
 
-   
+/* ---- LOGO BAYMAX COM AURA ---- */
+.baymax-logo-container {
+  position: relative;
+  width: 300px;
+  height: 180px;
+  margin: 0 auto 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.baymax-logo-container::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  transform: translate(-50%, -50%);
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 60%);
+  z-index: 0;
+  opacity: 0.8;
+}
+
+.baymax-logo {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 50px;
+  border: 4px solid #333;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 50px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 26px -18px inset;
+  z-index: 1;
+}
+
+.baymax-logo .dot {
+  width: 24px;
+  height: 24px;
+  background-color: #333;
+  border-radius: 50%;
+}
+
+.baymax-logo .line {
+  position: absolute;
+  left: 42px;
+  right: 42px;
+  height: 4px;
+  background-color: #333;
+}
+
+/* ---- TÍTULOS ---- */
+
+
+.welcome-title {
+  font-size: 3rem;
+  font-weight: 600;
+}
+
+.welcome-subtitle {
+  font-size: 1.25rem;
+  color: #6c757d;
+  margin-bottom: 0px;
+}
+
+/* ---- BARRA DE PESQUISA ---- */
+.health-query-container {
+  position: relative;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.health-query-input {
+  height: 60px;
+  border-radius: 50px;
+  padding-right: 70px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.health-query-input:focus {
+  box-shadow: 0 0 10px rgba(220, 53, 69, 0.4);
+  border-color: #f0a2aa;
+}
+
+.health-query-btn {
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: #e62e41;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 15px rgba(230, 46, 65, 0.7);
+  transition: background-color 0.2s ease-in-out;
+}
+
+.health-query-btn:hover {
+  background-color: #d12134;
+}
+
+.health-query-btn i {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+/* ---- CAIXA DE SUGESTÕES ---- */
+.suggestion-box {
+  max-width: 500px;
+  margin: 30px auto 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.suggestion-box p {
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: #555;
+}
+
+.suggestion-pill {
+  display: inline-block;
+  padding: 8px 15px;
+  margin: 5px;
+  background-color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  color: #333;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  transition: all 0.2s ease;
+}
+
+.suggestion-pill:hover {
+  background-color: #e62e41;
+  color: white;
+  border-color: #e62e41;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ---- RODAPÉ ---- */
+.main-footer {
+  margin-top: 20px;
+  padding: 1em;
+  color: #000;
+  text-align: center;
+  position: fixed;
+  bottom: 0px;
+}
+
+.avatar {
+  width: 100%;
+}
+
+
 .initial-view-item {
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
@@ -236,7 +272,7 @@ main {
 body.chat-view-active .initial-view-item {
   opacity: 0;
   transform: scale(0.9);
-  
+
   animation: hide-after-transition 0.5s forwards;
 }
 
@@ -254,19 +290,20 @@ body.chat-view-active .initial-view-item {
 
 
 body.chat-view-active .health-query-container {
-  position: fixed; 
-  bottom: 20px;    
-  left: 50%;       
-  transform: translateX(-50%); 
-  width: 90%;      
+  position: fixed;
+  bottom: 20px;
+  left: 100%;
+  transform: translateX(-130%);
+  width: 90%;
   max-width: 70%;
-  z-index: 100;    
+  z-index: 100;
   margin: 0;
 }
 
 /* Ajusta o conteúdo principal para não ficar escondido atrás do input fixo */
 body.chat-view-active #content {
-  padding-bottom: 120px; /* Adiciona espaço no fundo da área do chat */
+  padding-bottom: 120px;
+  /* Adiciona espaço no fundo da área do chat */
 }
 
 
@@ -279,7 +316,26 @@ body.chat-view-active #content {
   margin: 0px auto;
   overflow: auto;
   height: 90%;
-  padding: 1em;
+  padding: 1.5em;
+}
+
+#chat-container {
+  margin: 0!important;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 15px;
+  padding: 1.5em;
+  margin: 0px auto;
+}
+
+.push-bottom {
+  height: 0px!important;
+  position: fixed!important;
+  bottom: 0!important;
+  padding: 0!important;
+  border: 0!important;
+  margin-left: -1.5em;
 }
 
 @media (max-width: 1024px) {
@@ -288,7 +344,7 @@ body.chat-view-active #content {
   }
 
   div.w-50 {
-    width: 100%!important;
+    width: 100% !important;
   }
 }
 
@@ -297,6 +353,7 @@ body.chat-view-active #content {
   border-radius: 18px;
   max-width: 80%;
   line-height: 1.5;
+  text-align: start;
 }
 
 
@@ -304,38 +361,63 @@ body.chat-view-active #content {
   background-color: #e62e41;
   color: white;
   border-bottom-right-radius: 4px;
-  align-self: flex-end; 
+  align-self: flex-end;
 }
 
 .bot-message {
   background-color: #e9f5eea6;
   color: #333;
   border-bottom-left-radius: 4px;
-  align-self: flex-start; 
+  align-self: flex-start;
 }
 
-.chat-message, .health-query-input {
-  box-shadow: 14px 22px 27px -20px rgba(0,0,0,0.59);
-  -webkit-box-shadow: 14px 22px 27px -20px rgba(0,0,0,0.59);
-  -moz-box-shadow: 14px 22px 27px -20px rgba(0,0,0,0.59);
+.chat-message,
+.health-query-input {
+  box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
+  -webkit-box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
+  -moz-box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
 }
 
 @keyframes baymaxWobble {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(-8deg); }
-  50% { transform: rotate(8deg); }
-  75% { transform: rotate(-4deg); }
-  100% { transform: rotate(0deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(-8deg);
+  }
+
+  50% {
+    transform: rotate(8deg);
+  }
+
+  75% {
+    transform: rotate(-4deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 
 @keyframes eyeBlink {
-  0%, 100% { transform: scaleY(1); } 
-  50% { transform: scaleY(0.1); }   
+
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(0.1);
+  }
 }
-#map, .leaflet-container {
+
+#map,
+.leaflet-container {
   min-height: 500px;
 }
+
 .event-consulta {
   border-left: 4px solid #0d6efd !important;
   font-weight: 600;
@@ -347,7 +429,7 @@ body.chat-view-active #content {
 }
 
 .animate-goodbye .baymax-logo .dot:first-child {
-  
+
   animation: eyeBlink 0.4s ease-in-out forwards;
   animation-delay: 0.9s;
 }
@@ -357,23 +439,30 @@ body.chat-view-active #content {
   #content {
     max-width: 100%;
     width: 100%;
-    margin: 0px!important;
+    margin: 0px !important;
+  }
+  .container {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
   }
 
   div.w-50 {
-    width: 100%!important;
+    width: 100% !important;
   }
+
   div.p-5 {
-    padding: 1em!important;
+    padding: 1em !important;
   }
+
   .health-query-container {
-    width: 100%!important;
-    max-width: 90%!important;
+    width: 100% !important;
+    max-width: 90% !important;
   }
 
   .welcome-title {
     font-size: 1.5em;
   }
+
   .main-footer>p {
     margin-bottom: 3px;
   }
@@ -383,7 +472,10 @@ body.chat-view-active #content {
   }
 
   .aboutus-bg {
-    padding-top: 1.5em!important;
-    margin-top: 0px!important;
+    padding-top: 1.5em !important;
+    margin-top: 0px !important;
+  }
+  body.chat-view-active .health-query-container {
+    transform: translateX(-105%);
   }
 }

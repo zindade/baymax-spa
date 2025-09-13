@@ -7,9 +7,12 @@ export default function renderHome() {
   let chatHasStarted = false;
 
   const container = document.createElement('div');
-  container.className = 'container mt-5 text-center card p-5';
-  container.id = 'chat-container'
+  container.className = 'container my-5 text-center card p-5 glass';
+  container.id = 'chat-card'
 
+  const chatDiv = document.createElement("div");
+  chatDiv.id = "chat-container";
+  chatDiv.className = "container text-center";
   
   const logoContainer = document.createElement('div');
   logoContainer.className = 'baymax-logo-container initial-view-item';
@@ -28,7 +31,7 @@ export default function renderHome() {
   h1.textContent = 'Welcome, I am Baymax';
   const pWelcome = document.createElement('p');
   pWelcome.className = 'welcome-subtitle text-muted';
-  pWelcome.textContent = 'How can I assist you today?';
+  pWelcome.textContent = 'Your personal health assistant';
   welcomeDiv.appendChild(h1);
   welcomeDiv.appendChild(pWelcome);
 
@@ -37,7 +40,7 @@ export default function renderHome() {
   queryContainer.className = 'health-query-container';
   const input = document.createElement('input');
   input.className = 'form-control health-query-input';
-  input.placeholder = 'Type your health query...';
+  input.placeholder = 'Ask baymax a question..';
   input.id = 'healthQuery'; 
   input.name = 'health_query'; 
   const btn = document.createElement('button');
@@ -79,19 +82,23 @@ export default function renderHome() {
 
   const chatContentArea = document.getElementById("content");
 
+
   function waitForCssEvent(element, eventName) {
     return new Promise(resolve => {
       element.addEventListener(eventName, resolve, { once: true });
     });
   }
 
-  function displayMessage(htmlContent, sender) {
+  function displayMessage(htmlContent, sender, clear=false) {
+    if (clear) {
+      chatDiv.innerHTML = ""
+    }
     const messageDiv = document.createElement('div');
     messageDiv.className = `chat-message ${sender}-message`;
     messageDiv.innerHTML = htmlContent; 
-    chatContentArea.appendChild(messageDiv);
+    chatDiv.appendChild(messageDiv);
     
-    chatContentArea.scrollTop = chatContentArea.scrollHeight;
+    chatDiv.scrollTop = chatContentArea.scrollHeight;
   }
 
   async function handleSubmitQuestion() {
@@ -100,11 +107,11 @@ export default function renderHome() {
 
     
     if (chatHasStarted) {
-      displayMessage(question, 'user');
+      displayMessage(question, 'user', true);
       input.value = "";
       displayMessage("<i>Thinking...</i>", 'bot');
       const answer = await handleBaymaxQuestion(question);
-      chatContentArea.removeChild(chatContentArea.lastChild);
+      chatDiv.removeChild(chatDiv.lastChild);
       displayMessage(answer.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"), 'bot');
       return;
     }
@@ -113,14 +120,15 @@ export default function renderHome() {
       chatHasStarted = true; 
       
       const logoContainer = document.querySelector('.baymax-logo-container');
-      const chatCard = document.getElementById("chat-container");
-      
+      const chatCard = document.getElementById("chat-card");
+
+    
       logoContainer.classList.add('animate-goodbye');
       await waitForCssEvent(logo, 'animationend');
+      chatCard.classList.add("push-bottom");
         
       document.body.classList.add('chat-view-active');
-      chatCard.classList.remove("p-5");
-      chatCard.classList.add("border-0");  
+      input.placeholder = "Ask baymax another question.."
       await waitForCssEvent(queryContainer, 'transitionend');
 
       input.focus();
@@ -130,7 +138,7 @@ export default function renderHome() {
       displayMessage("<i>Thinking...</i>", 'bot');
       const answer = await handleBaymaxQuestion(question);
       
-      chatContentArea.removeChild(chatContentArea.lastChild);
+      chatDiv.removeChild(chatDiv.lastChild);
       let formattedAnswer = answer
         .replace(/\n/g, "<br>")
         .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
@@ -151,6 +159,7 @@ export default function renderHome() {
   container.appendChild(welcomeDiv);
   container.appendChild(queryContainer);
   container.appendChild(suggestionBox);
+  chatContentArea.appendChild(chatDiv);
 
   
   return container;
