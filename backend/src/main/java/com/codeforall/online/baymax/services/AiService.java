@@ -10,7 +10,7 @@ public interface AiService {
 
     Generation info(String question);
 
-    Generation medicationInfo(Medication medication, String question);
+    Generation medicationInfo(String medicationName, String question);
 
     Generation imageInfo(String question, String base64Image);
 

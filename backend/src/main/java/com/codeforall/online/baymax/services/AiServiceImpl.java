@@ -3,6 +3,10 @@ package com.codeforall.online.baymax.services;
 import com.codeforall.online.baymax.exceptions.MedicationNotFoundException;
 import com.codeforall.online.baymax.functions.MedicationInfoFunction;
 import com.codeforall.online.baymax.model.Medication;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.ChatClient;
@@ -49,6 +53,9 @@ public class AiServiceImpl implements AiService {
 
     @Value("${ai.vision.worker}")
     private String visionWorkerUrl;
+
+    @Value("${ai.prompt_template_medication}")
+    private Resource promptTemplateMedication;
 
     private RestTemplate restTemplate = new RestTemplate();
 
@@ -129,20 +136,39 @@ public class AiServiceImpl implements AiService {
 
 
     @Override
-    public Generation medicationInfo(Medication medication, String question) {
-        OpenAiChatOptions chatOptions = OpenAiChatOptions.builder()
-                .withFunctionCallbacks(List.of(
-                        FunctionCallbackWrapper.builder(new MedicationInfoFunction(medication))
-                                .withName("MedicationInfo")
-                                .withDescription("Get details for a medication")
-                                .build()
-                )).build();
+    public Generation medicationInfo(String activeIngredient, String question) {
 
-        PromptTemplate promptTemplate = new PromptTemplate(functionPromptTemplate);
-        Message message = promptTemplate.createMessage(Map.of("input", question));
-        Prompt prompt = new Prompt(message, chatOptions);
+        String formattedData;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
 
-        return chatClient.call(prompt).getResult();
+            List<String> dataList = objectMapper.readValue(question, new TypeReference<List<String>>() {});
+
+            formattedData = String.join("\n- ", dataList);
+
+            log.info("--- DADOS FORMATADOS PARA O PROMPT ---");
+            log.info(formattedData);
+            log.info("------------------------------------");
+
+        } catch (JsonProcessingException e) {
+            log.error("Error formating FDA data: " + e.getMessage());
+            formattedData = question;
+        }
+
+        Prompt response = null;
+
+        try{
+            PromptTemplate promptTemp = new PromptTemplate(promptTemplateMedication);
+            response = promptTemp.create(Map.of(
+                    "input", activeIngredient, "data", formattedData
+            ));
+        }catch (Exception e){
+            log.error("Error in info" + e.getMessage());
+        }
+
+        log.info(String.valueOf(response));
+
+        return chatClient.call(response).getResult();
     }
 
     @Autowired

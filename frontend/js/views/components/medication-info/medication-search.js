@@ -1,4 +1,5 @@
 import { renderMedicationInfo } from "/js/views/components/medication-info/medication-info.js";
+import { elementsSelecterJson } from"/js/views/components/medication-info/medication-info.js";
 import {div} from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
 import {input} from "/js/views/components/commons/input.js"
@@ -47,11 +48,31 @@ export function renderSearchBar(){
     console.log(firstelement);
 
     
-    const fdaUrl = `https://api.fda.gov/drug/label.json?search=active_ingredient:${firstelement}&limit=2`;
+    const fdaUrl = `https://api.fda.gov/drug/label.json?search=active_ingredient:${firstelement}&limit=1`;
     const fdaResponse = await fetch(fdaUrl);
     const fdaData = await fdaResponse.json();
 
-    renderMedicationInfo(fdaData, activeIngredient, medName);
+    const jsonData = await elementsSelecterJson(fdaData);
+
+    const response2 = await fetch(baymaxUrl + "/" + firstelement.toLowerCase(), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question: JSON.stringify(jsonData) }) 
+    });
+
+    console.log(JSON.stringify(jsonData))
+
+
+    const chatResponse = await response2.json();
+    
+
+    const resultsDiv = document.getElementById("results");
+
+    resultsDiv.innerHTML = `<p>${medName} contém ${activeIngredient.length} princípio(s) ativo(s): ${activeIngredient.join(", ")}</p>
+    <p>Response of chat:  ` + marked.parse(chatResponse.output?.content || "");
+
+    container.appendChild(resultsDiv)
+    //renderMedicationInfo(fdaData, activeIngredient, medName);
   });
 
     return container;

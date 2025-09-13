@@ -17,3 +17,4 @@ ai.function_prompt_template=classpath:/ai/templates/function-prompt-template.st
 ai.json_prompt_template=classpath:/ai/templates/prompt_template.json
 ai.prompt_template_fda=classpath:/ai/templates/prompt_template_FDA.st
 ai.prompt_template=classpath:/ai/templates/prompt_template.st
+ai.prompt_template_medication=classpath:/ai/templates/prompt_template_medication.st
