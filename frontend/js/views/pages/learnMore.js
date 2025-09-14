@@ -5,6 +5,7 @@ import { addAmenitiesToMap } from "../components/map/amenities-layer.js";
 export default function renderLearnMore() {
   const container = document.createElement("div");
   container.className = "container my-5";
+  container.id = "pharmacies-title"
 
   const mapTitle = document.createElement("h2");
   mapTitle.className = "text-center";

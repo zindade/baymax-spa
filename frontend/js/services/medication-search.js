@@ -111,7 +111,7 @@ async function showActiveIngredient(ingredient) {
   const selectedJson = await elementsSelecterJson(fdaData);
 
   const card = document.createElement('div');
-  card.className = "container mt-3 text-start card p-5"
+  card.className = "container my-3 text-start card p-5"
   card.id = "card-ingredients"
   if (selectedJson.length === 0) {
     card.innerHTML = `<p>No FDA information found for ingredient: ${ingredient}</p>`;
