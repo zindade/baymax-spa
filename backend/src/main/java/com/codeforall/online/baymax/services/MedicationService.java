@@ -5,7 +5,6 @@ import com.codeforall.online.baymax.model.Medication;
 
 import java.util.List;
 
-
 /**
  * Common interface for customer services, provides methods to manage customers
  */
@@ -18,9 +17,7 @@ public interface MedicationService {
      */
     Medication get(int customerId) throws MedicationNotFoundException;
 
-
     Medication add(Medication medication);
-
 
     List<Medication> list() throws MedicationNotFoundException;
 

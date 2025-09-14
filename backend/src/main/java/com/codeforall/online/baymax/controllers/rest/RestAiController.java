@@ -1,10 +1,8 @@
 package com.codeforall.online.baymax.controllers.rest;
 
-import com.codeforall.online.baymax.converters.GenerationToAnswerDto;
 import com.codeforall.online.baymax.dtos.QuestionDto;
 import com.codeforall.online.baymax.dtos.QuestionWithImageDto;
 import com.codeforall.online.baymax.services.AiService;
-import com.codeforall.online.baymax.services.MedicationService;
 import jakarta.validation.Valid;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.Generation;
@@ -28,8 +26,6 @@ import java.util.Map;
 public class RestAiController {
 
     private AiService aiService;
-    private GenerationToAnswerDto generationToAnswerDto;
-    private MedicationService medicationService;
     private ChatClient chatClient;
 
     @RequestMapping(method = RequestMethod.POST, path = {"/ask-baymax"})
@@ -48,8 +44,6 @@ public class RestAiController {
         );
     }
 
-
-
     @RequestMapping(method = RequestMethod.POST, path = {"/show-baymax"})
     public ResponseEntity<Generation> info(
             @Valid @RequestBody QuestionWithImageDto questionDto,
@@ -59,30 +53,10 @@ public class RestAiController {
             return ResponseEntity.badRequest().build();
         }
 
-        // Pass directly to service
         Generation result = aiService.imageInfo(questionDto.getQuestion(), questionDto.getImage());
 
         return ResponseEntity.ok(result);
     }
-
-    /*@RequestMapping(method = RequestMethod.POST, path = {"/medication/{mid}"})
-    public ResponseEntity<AnswerDto> customer(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult, @PathVariable Integer mid) {
-
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        Medication medication = null;
-
-        try {
-            medication = medicationService.get(mid);
-
-        } catch (MedicationNotFoundException e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(generationToAnswerDto.convert(aiService.medicationInfo(medication, questionDto.getQuestion())), HttpStatus.OK);
-    }*/
 
     @RequestMapping(method = RequestMethod.POST, path = {"/medication/active-ingredient"})
     public ResponseEntity<List<String>> getActiveIngredient(@RequestBody Map<String, String> payload) {
@@ -120,21 +94,9 @@ public class RestAiController {
         return ResponseEntity.ok(result);
     }
 
-
-
     @Autowired
     public void setAiService(AiService aiService) {
         this.aiService = aiService;
-    }
-
-    @Autowired
-    public void setMedicationService(MedicationService medicationService) {
-        this.medicationService = medicationService;
-    }
-
-    @Autowired
-    public void setGenerationToAnswerDto(GenerationToAnswerDto generationToAnswerDto) {
-        this.generationToAnswerDto = generationToAnswerDto;
     }
 
     @Autowired
