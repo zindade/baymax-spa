@@ -74,4 +74,11 @@ python -m llava.serve.model_worker \
   --port 8000
 ```
 
+---
 
+### Added `startup.sh`
+
+give permission to the script
+`chmod +x startup.sh`
+
+Run: `./startup.sh`
