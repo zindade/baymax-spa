@@ -86,7 +86,7 @@ main {
 #chat-card {
   height: 100%;
   justify-content: center;
-  gap: 3em;
+  gap: 0;
 }
 
 .glass {
@@ -401,7 +401,7 @@ body.chat-view-active #content {
   flex-direction: column;
   gap: 15px;
   width: 70%;
-  margin: 0px auto;
+  margin: 1em auto;
   overflow: auto;
   height: 90%;
   padding: 0px;
@@ -433,6 +433,7 @@ body.chat-view-active #content {
   }
 
   .medications-page {
+    margin-top: 2em!important;
     width: 95%;
   }
 
