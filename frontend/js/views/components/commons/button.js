@@ -7,4 +7,4 @@ function button(text, onClick, additionalClass = "") {
   return btn;
 }
 
-export {button};
+export { button };

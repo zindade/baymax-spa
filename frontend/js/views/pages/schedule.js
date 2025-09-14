@@ -26,7 +26,7 @@ export default function renderSchedule() {
 
 
   requestAnimationFrame(() => {
-    window.scrollTo(0,0); 
+    window.scrollTo(0, 0);
     calendar = initCalendar(calEl, {
       initialEvents: loadEvents(),
       onSelect: (info, cal) => openEventModal(

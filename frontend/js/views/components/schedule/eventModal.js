@@ -2,7 +2,7 @@
 import { TEAM } from "../../../services/schedule/constants.js";
 
 export function openEventModal(
-  { start=null, end=null, allDay=false } = {},
+  { start = null, end = null, allDay = false } = {},
   { onCreate }
 ) {
 
@@ -68,22 +68,22 @@ export function openEventModal(
   const Modal = window.bootstrap?.Modal;
   const modal = new Modal(modalEl);
 
- 
-  const startInp = modalEl.querySelector('input[name="start"]');
-  const endInp   = modalEl.querySelector('input[name="end"]');
-  const allDayInp= modalEl.querySelector('input[name="allday"]');
-  const isCbx    = modalEl.querySelector('#isConsultation');
-  const medBox   = modalEl.querySelector('[data-med]');
-  const cnsBox   = modalEl.querySelector('[data-consulta]');
 
- 
-  const toLocalInput = (d) => new Date(+d - new Date().getTimezoneOffset()*60000)
-    .toISOString().slice(0,16);
+  const startInp = modalEl.querySelector('input[name="start"]');
+  const endInp = modalEl.querySelector('input[name="end"]');
+  const allDayInp = modalEl.querySelector('input[name="allday"]');
+  const isCbx = modalEl.querySelector('#isConsultation');
+  const medBox = modalEl.querySelector('[data-med]');
+  const cnsBox = modalEl.querySelector('[data-consulta]');
+
+
+  const toLocalInput = (d) => new Date(+d - new Date().getTimezoneOffset() * 60000)
+    .toISOString().slice(0, 16);
   const now = new Date();
-  const defStart = start ?? new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours()+1, 0, 0, 0);
-  const defEnd   = end   ?? new Date(defStart.getTime() + 30*60000);
+  const defStart = start ?? new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours() + 1, 0, 0, 0);
+  const defEnd = end ?? new Date(defStart.getTime() + 30 * 60000);
   startInp.value = toLocalInput(defStart);
-  endInp.value   = toLocalInput(defEnd);
+  endInp.value = toLocalInput(defEnd);
   allDayInp.checked = !!allDay;
 
   isCbx.addEventListener("change", () => {
@@ -92,25 +92,25 @@ export function openEventModal(
     cnsBox.classList.toggle("d-none", !isConsulta);
   });
 
-  
+
   modalEl.querySelector("form").addEventListener("submit", (e) => {
     e.preventDefault();
 
     const start = new Date(startInp.value);
-    const end   = new Date(endInp.value);
-    const allday= allDayInp.checked;
+    const end = new Date(endInp.value);
+    const allday = allDayInp.checked;
 
     if (isCbx.checked) {
-     
+
       const doctor = modalEl.querySelector('select[name="doctor"]').value;
       onCreate && onCreate({
         type: "consulta",
         doctor, start, end, allDay: allday
       });
     } else {
-      
+
       const title = modalEl.querySelector('input[name="title"]').value?.trim();
-      if (!title) return; 
+      if (!title) return;
       onCreate && onCreate({
         type: "med",
         title, start, end, allDay: allday

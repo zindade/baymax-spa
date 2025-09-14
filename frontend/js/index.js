@@ -5,7 +5,7 @@ import { createNavbarDOM } from "./views/components/header.js"; // Corrigi o cam
 document.addEventListener("DOMContentLoaded", () => {
   // 1. Primeiro, cria e insere a navbar
   createNavbarDOM();
-  
+
   // 2. Depois, renderiza o conteúdo da página inicial
   render(getPath());
 
@@ -14,19 +14,19 @@ document.addEventListener("DOMContentLoaded", () => {
     render(getPath());
   });
 
-  self.addEventListener('fetch', function(event) {
-  if (event.request.url.includes('tile.openstreetmap.org')) {
-    event.respondWith(
-      caches.open('osm-tiles').then(function(cache) {
-        return cache.match(event.request).then(function(response) {
-          return response || fetch(event.request).then(function(networkResponse) {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
+  self.addEventListener('fetch', function (event) {
+    if (event.request.url.includes('tile.openstreetmap.org')) {
+      event.respondWith(
+        caches.open('osm-tiles').then(function (cache) {
+          return cache.match(event.request).then(function (response) {
+            return response || fetch(event.request).then(function (networkResponse) {
+              cache.put(event.request, networkResponse.clone());
+              return networkResponse;
+            });
           });
-        });
-      })
-    );
-  }
-});
+        })
+      );
+    }
+  });
 });
 

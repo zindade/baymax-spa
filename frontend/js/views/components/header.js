@@ -1,23 +1,23 @@
 export function createNavbarDOM() {
 
- const menuItems = [
-  { href: '#/', text: 'Home' },
-  { href: '#/medications', text: 'Medications' },
-  { href: '#/learnMore', text: 'Map' },          
-  { href: '#/wikiProfessions', text: 'Professions' }, 
-  { href: '#/aboutUs', text: 'About Us' },
-  { href: '#/schedule', text: 'Schedule' }
-];
+  const menuItems = [
+    { href: '#/', text: 'Home' },
+    { href: '#/medications', text: 'Medications' },
+    { href: '#/learnMore', text: 'Map' },
+    { href: '#/wikiProfessions', text: 'Professions' },
+    { href: '#/aboutUs', text: 'About Us' },
+    { href: '#/schedule', text: 'Schedule' }
+  ];
 
 
   const headerContainer = document.getElementById("header");
 
-  
+
   if (!headerContainer) {
-    
+
     return;
   }
-  
+
   const nav = document.createElement('nav');
   nav.className = 'navbar navbar-expand-lg navbar-dark navbar-custom';
 
@@ -36,7 +36,7 @@ export function createNavbarDOM() {
     </svg>
     I am Baymax
   `;
-  
+
   const button = document.createElement('button');
   button.className = 'navbar-toggler';
   button.type = 'button';
@@ -59,7 +59,7 @@ export function createNavbarDOM() {
     a.href = item.href;
     a.textContent = item.text;
     a.setAttribute('data-link', '');
-    
+
     li.appendChild(a);
     ul.appendChild(li);
   });
@@ -69,30 +69,25 @@ export function createNavbarDOM() {
   container.appendChild(button);
   container.appendChild(collapseDiv);
   nav.appendChild(container);
-  
 
-  
-
-
-  headerContainer.innerHTML = ''; 
-
+  headerContainer.innerHTML = '';
 
   headerContainer.appendChild(nav);
 
   const menuCollapse = document.getElementById('mainNav');
 
   if (menuCollapse) {
-    
+
     const navLinks = menuCollapse.querySelectorAll('.nav-link');
 
     const bsCollapse = new bootstrap.Collapse(menuCollapse, { toggle: false });
 
     navLinks.forEach((link) => {
-        link.addEventListener('click', () => {
-            if (menuCollapse.classList.contains('show')) {
-                bsCollapse.hide();
-            }
-        });
+      link.addEventListener('click', () => {
+        if (menuCollapse.classList.contains('show')) {
+          bsCollapse.hide();
+        }
+      });
     });
   }
 }
