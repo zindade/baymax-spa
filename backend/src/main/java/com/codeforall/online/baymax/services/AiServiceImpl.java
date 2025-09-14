@@ -1,20 +1,15 @@
 package com.codeforall.online.baymax.services;
 
 import com.codeforall.online.baymax.exceptions.MedicationNotFoundException;
-import com.codeforall.online.baymax.functions.MedicationInfoFunction;
-import com.codeforall.online.baymax.model.Medication;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.Generation;
-import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.chat.prompt.PromptTemplate;
-import org.springframework.ai.model.function.FunctionCallbackWrapper;
 import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +17,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Flux;
 
 
 import java.util.List;
@@ -78,7 +72,6 @@ public class AiServiceImpl implements AiService {
         } catch (Exception e) {
 
             log.error("Error in info" + e.getMessage());
-            log.error("Error in info" + question);
             PromptTemplate promptTemp = new PromptTemplate(promptTemplate);
             response = promptTemp.create(Map.of("input", question));
         }
@@ -122,7 +115,7 @@ public class AiServiceImpl implements AiService {
 
 
     public String getActiveIngredient (String question) throws MedicationNotFoundException{
-        log.info("Getting active ingredient for question: {}", question);
+        //log.info("Getting active ingredient for question: {}", question);
         try {
             PromptTemplate ragPrompt = new PromptTemplate(ragPromptTemplate);
             Prompt prompt = ragPrompt.create(Map.of(
@@ -130,7 +123,7 @@ public class AiServiceImpl implements AiService {
 
             String content = chatClient.call(prompt).getResult().getOutput().getContent();
             String query = content.trim().replace(" ", "+");
-            log.info("Query: {}", query);
+            //log.info("Query: {}", query);
             return query;
         }  catch (Exception e) {
             throw new MedicationNotFoundException();

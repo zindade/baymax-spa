@@ -58,7 +58,8 @@ build/
 !**/src/bootstrap/**/build/
 !**/src/test/**/build/
 /certs/
-
+/node_modules/
+node_modules/
 
 ### VS Code ###
 .vscode/

@@ -2,13 +2,10 @@ import { renderSearchBar } from "/js/services/medication-search.js";
 import { div } from "/js/views/components/commons/div.js";
 
 
-
-
-
 export default function renderMedications() {
   const container = div(["medications-page"]);
 
- 
+
   const searchBar = renderSearchBar();
   container.appendChild(searchBar);
 
@@ -21,6 +18,6 @@ export default function renderMedications() {
   container.appendChild(active_ingredient);
   container.appendChild(resultsDiv);
 
-  
-    return container;
+
+  return container;
 }

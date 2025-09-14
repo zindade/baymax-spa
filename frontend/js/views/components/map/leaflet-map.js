@@ -1,13 +1,13 @@
 export function createLeafletMap({ height = 500, center = [39.5, -8.0], zoom = 15 } = {}) {
 
   const redIcon = L.icon({
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x-red.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-  shadowSize: [41, 41]
-});
+    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x-red.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+    shadowSize: [41, 41]
+  });
 
   const el = document.createElement("div");
   el.style.height = `${height}px`;
@@ -17,12 +17,12 @@ export function createLeafletMap({ height = 500, center = [39.5, -8.0], zoom = 1
     requestAnimationFrame(() => {
       try {
         const map = L.map(el, {
-  center: [39.5, -8.0],
-  zoom: 7,
-  zoomControl: false,   // no + / - buttons
-  scrollWheelZoom: false, // disable mouse wheel zoom
-  dragging: true          // still allow dragging
-});
+          center: [39.5, -8.0],
+          zoom: 7,
+          zoomControl: false,   // no + / - buttons
+          scrollWheelZoom: false, // disable mouse wheel zoom
+          dragging: true          // still allow dragging
+        });
 
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
           attribution: '&copy; OpenStreetMap contributors'
@@ -37,11 +37,11 @@ export function createLeafletMap({ height = 500, center = [39.5, -8.0], zoom = 1
 
               // Add a marker at the user's location
               L.circleMarker(userLatLng, {
-                  radius: 10, // Adjust radius as needed
-                  color: 'red', // Sets the border color
-                  fillColor: 'red', // Sets the fill color
-                  fillOpacity: 0.7 // Adjust opacity as desired
-                })
+                radius: 10, // Adjust radius as needed
+                color: 'red', // Sets the border color
+                fillColor: 'red', // Sets the fill color
+                fillOpacity: 0.7 // Adjust opacity as desired
+              })
                 .addTo(map);
             },
             (err) => {

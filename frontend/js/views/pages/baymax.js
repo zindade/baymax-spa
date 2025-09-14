@@ -59,11 +59,11 @@ export default function renderHome() {
 	btn.className = 'btn health-query-btn';
 	btn.type = 'button';
 	btn.innerHTML = '<i class="bi bi-arrow-right"></i>';
-	
+
 	const loader = document.createElement("div");
-    loader.style.display = "none"
-    loader.style.position = "absolute"
-    loader.innerHTML = loaderSvg
+	loader.style.display = "none"
+	loader.style.position = "absolute"
+	loader.innerHTML = loaderSvg
 	btn.appendChild(loader);
 
 	queryContainer.appendChild(input);
@@ -176,16 +176,16 @@ export default function renderHome() {
 				.replace(/\n/g, "<br>")
 				.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 			displayMessage(formattedAnswer, 'bot');
-			
+
 		}
 		loader.style.display = "none"
 		inputDropzone.removeAllFiles();
-		
+
 	}
 
 	btn.addEventListener("click", handleSubmitQuestion);
 	input.addEventListener("keypress", (e) => {
-		
+
 		if (e.key === 'Enter') {
 			handleSubmitQuestion();
 		}

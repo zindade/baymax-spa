@@ -1,13 +1,12 @@
 import routes from "./routes.js";
 
 function getPath() {
-  return location.hash.slice(1) || "/"; 
+  return location.hash.slice(1) || "/";
 }
 
 export function render(path) {
   const content = document.getElementById("content");
   content.innerHTML = "";
-
 
   const page = routes[path];
   if (page) {
@@ -21,5 +20,3 @@ export function render(path) {
 }
 
 export { getPath };
-
-
