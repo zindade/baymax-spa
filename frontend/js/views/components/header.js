@@ -1,21 +1,23 @@
 export function createNavbarDOM() {
-  const menuItems = [
-    { href: '#/', text: 'Ask Baymax' },
-    { href: '#/medications', text: 'Medications' },
-    { href: '#/learnMore', text: 'Learn More' },
-    { href: '#/aboutUs', text: 'About Us' },
-    {href: '#/schedule', text: 'Schedule'}
-  ];
+
+ const menuItems = [
+  { href: '#/', text: 'Home' },
+  { href: '#/medications', text: 'Medications' },
+  { href: '#/learnMore', text: 'Map' },          
+  { href: '#/wikiProfessions', text: 'Professions' }, 
+  { href: '#/aboutUs', text: 'About Us' },
+  { href: '#/schedule', text: 'Schedule' }
+];
+
 
   const headerContainer = document.getElementById("header");
 
-  // Verificamos se o container existe
+  
   if (!headerContainer) {
-    console.error('Elemento com id "header" não encontrado no DOM.');
+    
     return;
   }
   
-  // O resto do código é para criar os elementos
   const nav = document.createElement('nav');
   nav.className = 'navbar navbar-expand-lg navbar-dark navbar-custom';
 
@@ -62,14 +64,18 @@ export function createNavbarDOM() {
     ul.appendChild(li);
   });
 
-
   collapseDiv.appendChild(ul);
   container.appendChild(brandLink);
   container.appendChild(button);
   container.appendChild(collapseDiv);
   nav.appendChild(container);
   
+
+  
+
+
   headerContainer.innerHTML = ''; 
+
 
   headerContainer.appendChild(nav);
 
