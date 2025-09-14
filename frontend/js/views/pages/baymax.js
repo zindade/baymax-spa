@@ -2,6 +2,7 @@ import { handleBaymaxQuestion } from "/js/services/handle-baymax-question.js";
 import { button } from "/js/views/components/commons/button.js";
 import { clipSvg } from "/js/views/components/svg.js";
 import { resizeFile } from "/js/services/image-resizer.js";
+import { loaderSvg } from "/js/views/components/svg.js";
 
 
 export default function renderHome() {
@@ -13,12 +14,12 @@ export default function renderHome() {
 	let chatHasStarted = false;
 
 	const container = document.createElement('div');
-	container.className = 'container my-5 text-center card p-5 glass';
+	container.className = 'container  text-center card p-0 glass';
 	container.id = 'chat-card'
 
 	const chatDiv = document.createElement("div");
 	chatDiv.id = "chat-container";
-	chatDiv.className = "container text-center";
+	chatDiv.className = "container text-center p-0";
 
 	const logoContainer = document.createElement('div');
 	logoContainer.className = 'baymax-logo-container initial-view-item';
@@ -58,6 +59,12 @@ export default function renderHome() {
 	btn.className = 'btn health-query-btn';
 	btn.type = 'button';
 	btn.innerHTML = '<i class="bi bi-arrow-right"></i>';
+	
+	const loader = document.createElement("div");
+    loader.style.display = "none"
+    loader.style.position = "absolute"
+    loader.innerHTML = loaderSvg
+	btn.appendChild(loader);
 
 	queryContainer.appendChild(input);
 	queryContainer.appendChild(btn);
@@ -127,6 +134,7 @@ export default function renderHome() {
 	}
 
 	async function handleSubmitQuestion() {
+		loader.style.display = "inline"
 		const question = input.value.trim();
 		if (!question) return;
 
@@ -168,12 +176,16 @@ export default function renderHome() {
 				.replace(/\n/g, "<br>")
 				.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 			displayMessage(formattedAnswer, 'bot');
+			
 		}
+		loader.style.display = "none"
 		inputDropzone.removeAllFiles();
+		
 	}
 
 	btn.addEventListener("click", handleSubmitQuestion);
 	input.addEventListener("keypress", (e) => {
+		
 		if (e.key === 'Enter') {
 			handleSubmitQuestion();
 		}

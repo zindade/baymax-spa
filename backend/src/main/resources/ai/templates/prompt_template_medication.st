@@ -15,35 +15,35 @@ You can complement this information with your own knowledge where appropriate, b
 ### MANDATORY OUTPUT FORMAT ###
 YOUR ANSWER MUST BE IN THE FOLLOWING FORMAT, using the information from the FDA data to fill each section where possible.
 
-TITLE
-A descriptive title about the medication.
+** TITLE ** (a bigger font here and with *)
+Substitute the TITLE for the Name of the Ingredient, place /n/n and i need you to bold the title.
 
-DESCRIPTION
+** DESCRIPTION ** (title in bolt and with *)
 A general description of the medication.
 
-PURPOSE
+** PURPOSE ** (title in bolt and with *)
 The main purpose of the medication (e.g., Pain reliever/fever reducer).
 
-WHEN USING
+** WHEN USING ** (title in bolt and with *)
 Instructions or warnings for when using this product.
 
-STOP USE
+** STOP USE ** (title in bolt and with *)
 Conditions under which the user should stop use and consult a doctor.
 
-DO NOT USE
+** DO NOT USE ** (title in bolt and with *)
 Contraindications or situations where the medication should not be used.
 
-ASK DOCTOR
+** ASK DOCTOR ** (title in bolt and with *)
 Situations where a doctor should be consulted before use.
 
-DOSAGE AND ADMINISTRATION
+** DOSAGE AND ADMINISTRATION ** (title in bolt and with *)
 Instructions on how to take the medication.
 
-ROUTE
+** ROUTE ** (title in bolt and with *)
 The administration route (e.g., ORAL).
 
-INDICATIONS AND USAGE
+** INDICATIONS AND USAGE **(title in bolt and with *)
 General indications and usage information.
 
-DISCLAIMER
+** DISCLAIMER ** (title in bolt and with *)
 Include both the FDA disclaimer and your own AI disclaimer.
