@@ -78,7 +78,6 @@ public class AiServiceImpl implements AiService {
         } catch (Exception e) {
 
             log.error("Error in info" + e.getMessage());
-            log.error("Error in info" + question);
             PromptTemplate promptTemp = new PromptTemplate(promptTemplate);
             response = promptTemp.create(Map.of("input", question));
         }
@@ -122,7 +121,7 @@ public class AiServiceImpl implements AiService {
 
 
     public String getActiveIngredient (String question) throws MedicationNotFoundException{
-        log.info("Getting active ingredient for question: {}", question);
+        //log.info("Getting active ingredient for question: {}", question);
         try {
             PromptTemplate ragPrompt = new PromptTemplate(ragPromptTemplate);
             Prompt prompt = ragPrompt.create(Map.of(
@@ -130,7 +129,7 @@ public class AiServiceImpl implements AiService {
 
             String content = chatClient.call(prompt).getResult().getOutput().getContent();
             String query = content.trim().replace(" ", "+");
-            log.info("Query: {}", query);
+            //log.info("Query: {}", query);
             return query;
         }  catch (Exception e) {
             throw new MedicationNotFoundException();

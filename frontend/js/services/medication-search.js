@@ -2,7 +2,7 @@ import { elementsSelecterJson } from"/js/views/components/medication-info/medica
 import {div} from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
 
-const baymaxUrl = "http://salab3rt.ddns.net:8080/baymax/api/medication/active-ingredient";
+const baymaxUrl = "https://salab3rt.ddns.net:8443/baymax/api/medication/active-ingredient";
 
 export function renderSearchBar(){
 
