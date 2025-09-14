@@ -1,4 +1,5 @@
 export function createNavbarDOM() {
+
  const menuItems = [
   { href: '#/', text: 'Home' },
   { href: '#/medications', text: 'Medications' },
@@ -7,6 +8,7 @@ export function createNavbarDOM() {
   { href: '#/aboutUs', text: 'About Us' },
   { href: '#/schedule', text: 'Schedule' }
 ];
+
 
   const headerContainer = document.getElementById("header");
 
@@ -53,21 +55,44 @@ export function createNavbarDOM() {
     const li = document.createElement('li');
     li.className = 'nav-item';
     const a = document.createElement('a');
-    a.className = 'nav-link';
+    a.className = 'nav-link ';
     a.href = item.href;
     a.textContent = item.text;
     a.setAttribute('data-link', '');
+    
     li.appendChild(a);
     ul.appendChild(li);
   });
-  
+
   collapseDiv.appendChild(ul);
   container.appendChild(brandLink);
   container.appendChild(button);
   container.appendChild(collapseDiv);
   nav.appendChild(container);
   
+
   
+
+
   headerContainer.innerHTML = ''; 
+
+
   headerContainer.appendChild(nav);
+
+  const menuCollapse = document.getElementById('mainNav');
+
+  if (menuCollapse) {
+    
+    const navLinks = menuCollapse.querySelectorAll('.nav-link');
+
+    const bsCollapse = new bootstrap.Collapse(menuCollapse, { toggle: false });
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+            if (menuCollapse.classList.contains('show')) {
+                bsCollapse.hide();
+            }
+        });
+    });
+  }
 }

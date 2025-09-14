@@ -1,9 +1,9 @@
 export default function renderAboutUs() {
   const team = [
-    { name: "Daniel", role: "Software Engineer", blurb: "Crafting the core logic", img: "../assets/teamPhotos/daniel.png" },
-    { name: "Mauro",  role: "Software Engineer",      blurb: "Guiding the vision",    img: "../assets/teamPhotos/mauro.png"  },
-    { name: "Pedro",  role: "Software Engineer",    blurb: "Ensuring a friendly experience", img: "../assets/teamPhotos/pedro.png" },
-    { name: "tiago",  role: "Software Engineer",    blurb: "Powering smart insights", img: "../assets/teamPhotos/tiago.png" },
+    { name: "Daniel", role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/daniel.png" },
+    { name: "Mauro",  role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/mauro.png"  },
+    { name: "Pedro",  role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/pedro.png" },
+    { name: "Tiago",  role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/tiago.png" },
   ];
 
   // helperzinho para reduzir verbosidade
@@ -14,11 +14,11 @@ export default function renderAboutUs() {
     return e;
   };
 
-  const wrap = el("div", "container py-5 aboutus-bg");
+  const wrap = el("div", "container aboutus-bg");
 
   const headingWrap = el("div", "text-center mb-5");
   const h2 = el("h2", "display-6 fw-bold mb-2");
-  h2.innerHTML = "Meet the Minds Behind Your<br>Healthcare Companion";
+  h2.innerHTML = "Meet the Baymax Team";
   headingWrap.appendChild(h2);
   wrap.appendChild(headingWrap);
 
@@ -26,7 +26,7 @@ export default function renderAboutUs() {
 
   team.forEach(m => {
     const col   = el("div", "col-12 col-sm-6 col-lg-5");
-    const card  = el("div", "card team-card text-center shadow-sm border-0 rounded-4 p-4");
+    const card  = el("div", "card team-card text-center shadow-sm border-0 rounded-4 p-4 glass");
 
     const ring  = el("div", "mx-auto avatar-ring mb-3");
     const img   = el("img", "avatar");

@@ -1,14 +1,10 @@
 package com.codeforall.online.baymax.controllers.rest;
 
 import com.codeforall.online.baymax.converters.GenerationToAnswerDto;
-import com.codeforall.online.baymax.dtos.AnswerDto;
 import com.codeforall.online.baymax.dtos.QuestionDto;
-import com.codeforall.online.baymax.exceptions.MedicationNotFoundException;
-import com.codeforall.online.baymax.model.Medication;
+import com.codeforall.online.baymax.dtos.QuestionWithImageDto;
 import com.codeforall.online.baymax.services.AiService;
 import com.codeforall.online.baymax.services.MedicationService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import org.springframework.ai.chat.ChatClient;
 import org.springframework.ai.chat.Generation;
@@ -18,13 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * A REST API AI Controller responsible for rendering AI responses
@@ -57,23 +50,22 @@ public class RestAiController {
 
 
 
-    /*@RequestMapping(method = RequestMethod.POST, path = {"/ask-baymax"})
-    public ResponseEntity<Generation> info(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult) {
+    @RequestMapping(method = RequestMethod.POST, path = {"/show-baymax"})
+    public ResponseEntity<Generation> info(
+            @Valid @RequestBody QuestionWithImageDto questionDto,
+            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
         }
 
-        String question = questionDto.getQuestion(); // may be null
-        String base64Image = questionDto.getImage(); // mandatory
+        // Pass directly to service
+        Generation result = aiService.imageInfo(questionDto.getQuestion(), questionDto.getImage());
 
-        return new ResponseEntity<>(
-                aiService.info(question, base64Image),
-                HttpStatus.OK
-        );
+        return ResponseEntity.ok(result);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = {"/medication/{mid}"})
+    /*@RequestMapping(method = RequestMethod.POST, path = {"/medication/{mid}"})
     public ResponseEntity<AnswerDto> customer(@Valid @RequestBody QuestionDto questionDto, BindingResult bindingResult, @PathVariable Integer mid) {
 
         if (bindingResult.hasErrors()) {
@@ -96,7 +88,6 @@ public class RestAiController {
     public ResponseEntity<List<String>> getActiveIngredient(@RequestBody Map<String, String> payload) {
         String medicineName = payload.get("name");
 
-        // Prompt para o ChatGPT
         String prompt = "Responde apenas com o(s) nome(s) do(s) princípio(s) ativo(s) em inglês (nome usado nos EUA) "
                 + "do medicamento \"" + medicineName + "\". "
                 + "Não escrevas mais nada, sem frases, só os nomes separados por vírgula.";
@@ -114,7 +105,20 @@ public class RestAiController {
 
         return ResponseEntity.ok(activeIngredients);
     }
+    @RequestMapping(method = RequestMethod.POST, path = {"/medication/active-ingredient/{ai}"})
+    public ResponseEntity<Generation> medicamentInfo(
+            @Valid @RequestBody QuestionDto questionDto,
+            @PathVariable("ai") String ai,
+            BindingResult bindingResult) {
 
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        Generation result = aiService.medicationInfo(ai, questionDto.getQuestion());
+
+        return ResponseEntity.ok(result);
+    }
 
 
 

@@ -1,18 +1,20 @@
 # Database Configuration
 db.host=localhost
-db.name=javabank
-db.username=postgres
-db.password=
+db.name=baymax
+db.username=username
+db.password=1234
 schema.auto=create
 debug.sql=true
 
 # AI Configuration
-ai.api_key=XXXXXXXXXXXXXXXXXXXX
+ai.api_key=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ai.chat.model=gpt-4o
-ai.embedding.model=text-embedding-3-small
+ai.embedding.model=text-embedding-ada-002
 ai.temperature=0.4
-ai.vector_store_file=/tmp/vector_store.json
-ai.rag_documents=classpath:/ai/rag/*
+ai.vision.worker=http://localhost:40000/worker_generate_stream
 ai.rag_prompt_template=classpath:/ai/templates/rag-prompt-template.st
-ai.rag_number_results=4
 ai.function_prompt_template=classpath:/ai/templates/function-prompt-template.st
+ai.json_prompt_template=classpath:/ai/templates/prompt_template.json
+ai.prompt_template_fda=classpath:/ai/templates/prompt_template_FDA.st
+ai.prompt_template=classpath:/ai/templates/prompt_template.st
+ai.prompt_template_medication=classpath:/ai/templates/prompt_template_medication.st

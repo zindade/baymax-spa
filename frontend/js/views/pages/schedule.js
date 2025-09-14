@@ -7,7 +7,7 @@ import { addConsultation, seedOneConsultationPerDoctor } from "../../services/sc
 
 export default function renderSchedule() {
   const container = document.createElement("div");
-  container.className = "container my-5";
+  container.className = "container";
 
   const h1 = document.createElement("h1");
   h1.className = "mb-3";

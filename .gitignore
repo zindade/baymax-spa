@@ -57,6 +57,8 @@ target/
 build/
 !**/src/bootstrap/**/build/
 !**/src/test/**/build/
+/certs/
+
 
 ### VS Code ###
 .vscode/

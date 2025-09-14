@@ -1,27 +1,9 @@
 {
-  "model": "gpt-4o-mini",
-  "messages": [
-    {
-      "role": "system",
-      "content": "{system_content}"
-    },
-    {
-      "role": "user",
-      "content": [
-        {
-          "type": "text",
-          "text": "{user_text}"
-        },
-        {
-          "type": "image_url",
-          "image_url": {
-            "url": "{image_base64}",
-            "detail": "low"
-          }
-        }
-      ]
-    }
-  ],
-  "max_tokens": 100,
-  "temperature": 0.2
+  "model": "llava-med",
+  "prompt": "[INST] \n\n<image>\n<<SYS>><</SYS>> ${QUESTION}. Identify the condition, medication or the disease. Give a comprehensive explanation and then answer the question. **Do NOT mention the image in your response.** [/INST]",
+  "temperature": 0.2,
+  "top_p": 0.2,
+  "max_new_tokens": 600,
+  "stop": "</s>",
+  "images": ["${IMAGE_BASE64}"]
 }

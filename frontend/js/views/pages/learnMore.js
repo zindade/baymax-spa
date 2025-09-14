@@ -7,7 +7,7 @@ export default function renderLearnMore() {
   container.className = "container my-5";
 
   const mapTitle = document.createElement("h2");
-  mapTitle.className = "text-center my-5";
+  mapTitle.className = "text-center";
   mapTitle.textContent = "Hospitals and Pharmacies in Portugal";
   container.appendChild(mapTitle);
 
