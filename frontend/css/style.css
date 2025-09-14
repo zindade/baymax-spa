@@ -15,9 +15,10 @@ body {
   position: relative;
   color: #333;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  padding-top: 90px;
+  padding-top: 65px;
   height: 100dvh;
   overflow: hidden;
+  font-size: 1.1em;
 }
 
 body::before {
@@ -62,7 +63,7 @@ main {
 
 .navbar-brand-custom svg {
   margin-right: 10px;
-  width: 34px;
+  width: 45px;
   height: auto;
 }
 
@@ -85,6 +86,8 @@ main {
 #chat-card {
   height: 100%;
   justify-content: center;
+  margin-bottom: 1em;
+  gap: 0;
 }
 
 .glass {
@@ -100,7 +103,7 @@ main {
   position: relative;
   width: 300px;
   height: 180px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto 1em auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -120,8 +123,8 @@ main {
 }
 
 .baymax-logo {
-  width: 100%;
-  height: 100%;
+  width: 300px;
+  height: 180px;
   background-color: white;
   border-radius: 50px;
   border: 4px solid #333;
@@ -238,13 +241,13 @@ main {
   max-width: 400px;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   padding: 12px;
   display: none;
 }
 
 .dz-progress {
-  top: 100%!important;
+  top: 100% !important;
 }
 
 #imageDropzone {
@@ -252,15 +255,15 @@ main {
 }
 
 .dz-remove {
-      opacity: 1;
-    z-index: 21;
-    position: absolute;
-    left: 100%;
-    top: 0%;
-    margin-top: -8px;
-    overflow: hidden;
-    color: red;
-    font-size: 20px!important;
+  opacity: 1;
+  z-index: 21;
+  position: absolute;
+  left: 100%;
+  top: 0%;
+  margin-top: -8px;
+  overflow: hidden;
+  color: red;
+  font-size: 20px !important;
 }
 
 #search-container {
@@ -268,25 +271,26 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border-radius: 20px; 
+  border-radius: 20px;
   padding: 40px;
   box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
   -webkit-box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
   -moz-box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
 }
 
-#card-ingredients, #card-ingredients-title{
+#card-ingredients,
+#card-ingredients-title {
   display: flex;
   flex-direction: column;
   text-align: left;
-  border-radius: 20px; 
+  border-radius: 20px;
   padding: 40px;
   box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
   -webkit-box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
   -moz-box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
 }
 
-#card-ingredients-title p{
+#card-ingredients-title p {
   justify-content: start;
   align-items: start;
   font-size: 150%;
@@ -345,6 +349,11 @@ main {
   width: 100%;
 }
 
+.fc .fc-view-harness,
+.fc .fc-scrollgrid {
+  background-color: white;
+  border-radius: 10px;
+}
 
 .initial-view-item {
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
@@ -386,6 +395,9 @@ body.chat-view-active #content {
   /* Adiciona espaço no fundo da área do chat */
 }
 
+.medications-page {
+  width: 700px;
+}
 
 /* --- ESTILOS PARA AS MENSAGENS DO CHAT (BÓNUS) --- */
 #content {
@@ -393,10 +405,11 @@ body.chat-view-active #content {
   flex-direction: column;
   gap: 15px;
   width: 70%;
-  margin: 0px auto;
+  margin: 1em auto;
   overflow: auto;
   height: 90%;
   padding: 0px;
+  align-items: center;
 }
 
 #chat-container {
@@ -404,7 +417,7 @@ body.chat-view-active #content {
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 15px;
+  gap: 2rem;
   padding: 1.5em;
   margin: 0px auto;
 }
@@ -423,8 +436,18 @@ body.chat-view-active #content {
     max-width: 100%;
   }
 
+  .medications-page {
+    margin-top: 2em!important;
+    width: 95%;
+  }
+
   div.w-50 {
     width: 100% !important;
+  }
+
+  .my-5 {
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
   }
 }
 
@@ -442,6 +465,11 @@ body.chat-view-active #content {
   color: white;
   border-bottom-right-radius: 4px;
   align-self: flex-end;
+  -webkit-box-shadow: 13px 17px 18px -18px rgba(0, 0, 0, 0.89) !important;
+}
+
+.fc-view-harness-active {
+  height: 62vh !important;
 }
 
 .bot-message {
@@ -495,7 +523,7 @@ body.chat-view-active #content {
 
 #map,
 .leaflet-container {
-  min-height: 500px;
+  min-height: 69vh;
 }
 
 .event-consulta {
@@ -525,17 +553,39 @@ body.chat-view-active #content {
     max-width: 100%;
     width: 100%;
     margin: 0px !important;
-    height: 95%;
+    height: 96%;
     padding-top: 0;
+  }
+
+  #chat-card {
+    gap: 0em;
   }
 
   #chat-container {
     padding: 0 !important;
+    margin-top: 1em !important;
   }
 
   .container {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+  }
+
+  #card-ingredients-title,
+  #search-container,
+  #pharmacies-title,
+  #wiki-title {
+    margin-top: 1.5em !important;
+  }
+
+  #schedule-title {
+    margin-top: 1em;
+  }
+
+  #card-ingredients,
+  #results {
+    margin-bottom: 1.5em !important;
+    margin-top: 1.5em !important;
   }
 
   div.w-50 {
@@ -546,10 +596,16 @@ body.chat-view-active #content {
     padding: 1em !important;
   }
 
+  .baymax-logo {
+    width: 215px;
+    height: 130px;
+  }
+
   .health-query-container {
-    width: 100% !important;
-    max-width: 100% !important;
+    width: 97% !important;
+    max-width: 97% !important;
     padding: 15px 0;
+    align-self: center;
   }
 
   .health-query-btn-add {
@@ -578,6 +634,18 @@ body.chat-view-active #content {
     display: none;
   }
 
+  .fc-view-harness-active {
+    height: 59vh !important;
+  }
+
+  .fc .fc-toolbar-chunk {
+    font-size: 0.6em;
+  }
+
+  .leaflet-container {
+    margin-top: 3em;
+  }
+
   .aboutus-bg {
     padding-top: 1.5em !important;
     margin-top: 0px !important;
@@ -585,6 +653,10 @@ body.chat-view-active #content {
 
   body.chat-view-active .health-query-container {
     right: 50%;
-    transform: translateX(50%);
+    transform: translateX(53%);
+  }
+
+  .suggestion-box {
+    margin-top: 0 !important;
   }
 }

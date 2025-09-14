@@ -8,6 +8,7 @@ export default function renderWikiProfessions() {
   const heading = document.createElement("h1");
   heading.className = "text-center mb-4";
   heading.textContent = "Learn About Health Professionals";
+  heading.id = "wiki-title"
   container.appendChild(heading);
 
   const description = document.createElement("p");

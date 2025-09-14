@@ -11,7 +11,8 @@ export default function renderSchedule() {
 
   const h1 = document.createElement("h1");
   h1.className = "mb-3";
-  h1.textContent = "My Medication Schedule";
+  h1.textContent = "Medication Scheduler";
+  h1.id = "schedule-title"
   container.appendChild(h1);
 
   const toolbar = buildScheduleToolbar({
