@@ -16,7 +16,7 @@ export default function renderSchedule() {
 
   const toolbar = buildScheduleToolbar({
     onSeed: () => seedOneConsultationPerDoctor(calendar),
-    onClear: () => { if (confirm("Apagar todos os eventos?")) clearAll(calendar); },
+    onClear: () => { if (confirm("delete event?")) clearAll(calendar); },
     onNew: () => openEventModal({}, { onCreate: handleCreate })
   });
   container.appendChild(toolbar);
@@ -50,7 +50,7 @@ export default function renderSchedule() {
         extendedProps: { type: "med" }
       });
       saveEventsFromCalendar(calendar);
-    } else if (payload.type === "consulta") {
+    } else if (payload.type === "doctor appointment ") {
       addConsultation(calendar, {
         doctor: payload.doctor,
         start: payload.start,
