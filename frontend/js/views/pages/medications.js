@@ -1,4 +1,4 @@
-import { renderSearchBar } from "/js/views/components/medication-info/medication-search.js";
+import { renderSearchBar } from "/js/services/medication-search.js";
 import { div } from "/js/views/components/commons/div.js";
 
 

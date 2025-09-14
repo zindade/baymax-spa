@@ -554,6 +554,7 @@ body.chat-view-active #content {
   }
 
   body.chat-view-active .health-query-container {
-    transform: translateX(-105%);
+    right: 50%;
+    transform: translateX(50%);
   }
 }
