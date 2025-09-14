@@ -251,6 +251,7 @@ export default function renderHome() {
 		maxFiles: 1,
 		addRemoveLinks: true, // show remove link
 		dictRemoveFile: "<i class='bi-x-circle'></i>",
+		dictDefaultMessage: "Drop image here to <br> show baymax",
 		//maxFilesize: 1,
 		//dictFileTooBig: "File is too big. Max 1MB allowed.",
 	});
