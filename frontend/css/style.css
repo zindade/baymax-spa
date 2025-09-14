@@ -518,7 +518,7 @@ body.chat-view-active #content {
 
 #map,
 .leaflet-container {
-  min-height: 500px;
+  min-height: 69vh;
 }
 
 .event-consulta {
