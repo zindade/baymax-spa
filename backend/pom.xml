@@ -215,7 +215,7 @@
                 <version>2.2</version>
                 <configuration>
                     <url>http://localhost:8080/manager/text</url>
-                    <server>tomcatserver</server>
+                    <server>tomcat</server>
                     <path>/baymax</path>
                 </configuration>
             </plugin>

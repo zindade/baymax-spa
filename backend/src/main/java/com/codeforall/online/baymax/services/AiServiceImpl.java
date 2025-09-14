@@ -90,7 +90,9 @@ public class AiServiceImpl implements AiService {
     public Generation imageInfo(String question, String base64Image) {
 
         try {
-            String visionPayload = TemplateLoader.fillTemplate(jsonPromptTemplate, question, base64Image);
+            String visionPayload = TemplateLoader.fillTemplate(jsonPromptTemplate,
+                    question,
+                    base64Image);
 
             String visionResult = WebClient.create()
                     .post()
@@ -103,6 +105,7 @@ public class AiServiceImpl implements AiService {
             String[] chunks = visionResult.split("\u0000");
             String finalText = chunks[chunks.length - 1];
             finalText = finalText.replace("<image>", "");
+            finalText = finalText.split("<</SYS>>")[1];
 
             log.info("Vision worker raw response: {}", finalText);
 

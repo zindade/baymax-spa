@@ -1,6 +1,6 @@
 export function createNavbarDOM() {
   const menuItems = [
-    { href: '#/', text: 'Home' },
+    { href: '#/', text: 'Ask Baymax' },
     { href: '#/medications', text: 'Medications' },
     { href: '#/learnMore', text: 'Learn More' },
     { href: '#/aboutUs', text: 'About Us' },
