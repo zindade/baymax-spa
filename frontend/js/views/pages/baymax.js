@@ -1,6 +1,7 @@
 import { handleBaymaxQuestion } from "/js/services/handle-baymax-question.js";
 import { button } from "/js/views/components/commons/button.js";
 import { clipSvg } from "/js/views/components/svg.js";
+import { resizeFile } from "/js/services/image-resizer.js";
 
 
 export default function renderHome() {
@@ -129,6 +130,7 @@ export default function renderHome() {
 
 		toggleDropzone(null, true);
 
+
 		if (chatHasStarted) {
 			displayMessage(question, 'user', true, imageBase64);
 			input.value = "";
@@ -136,7 +138,6 @@ export default function renderHome() {
 			const answer = await handleBaymaxQuestion(question, imageBase64);
 			chatDiv.removeChild(chatDiv.lastChild);
 			displayMessage(answer.replace(/\n/g, "<br>").replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>"), 'bot');
-			return;
 		}
 
 		if (!chatHasStarted) {
@@ -166,8 +167,8 @@ export default function renderHome() {
 				.replace(/\n/g, "<br>")
 				.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
 			displayMessage(formattedAnswer, 'bot');
-
 		}
+		inputDropzone.removeAllFiles();
 	}
 
 	btn.addEventListener("click", handleSubmitQuestion);
@@ -230,28 +231,28 @@ export default function renderHome() {
 
 	Dropzone.autoDiscover = false;
 
-	const myDropzone = new Dropzone(form, {
+	const inputDropzone = new Dropzone(form, {
 		url: "/ignore", // ignore
 		autoProcessQueue: false,
 		acceptedFiles: "image/*",
 		maxFiles: 1,
 		addRemoveLinks: true, // show remove link
-		dictRemoveFile: "<i class='bi-x-circle'></i>", // optional: text for the remove link
+		dictRemoveFile: "<i class='bi-x-circle'></i>",
+		//maxFilesize: 1,
+		//dictFileTooBig: "File is too big. Max 1MB allowed.",
 	});
 
-	myDropzone.on("addedfile", () => {
-		if (myDropzone.files.length > 1) {
-			myDropzone.removeFile(myDropzone.files[0]); // remove previous file
+	inputDropzone.on("addedfile", async (file) => {
+		if (inputDropzone.files.length > 1) {
+			inputDropzone.removeFile(inputDropzone.files[0]); // remove previous file
 		}
+		imageBase64 = await resizeFile(file);
 	});
 
-	myDropzone.on("removedfile", () => {
+	inputDropzone.on("removedfile", () => {
 		imageBase64 = null;
 	});
 
-	myDropzone.on("thumbnail", (file, dataUrl) => {
-		imageBase64 = dataUrl;
-	});
 
 
 	return container;

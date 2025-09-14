@@ -90,8 +90,10 @@ public class AiServiceImpl implements AiService {
     public Generation imageInfo(String question, String base64Image) {
 
         try {
-            String visionPayload = TemplateLoader.fillTemplate(jsonPromptTemplate, question, base64Image);
-            log.info("Vision Payload: " + visionPayload);
+            String visionPayload = TemplateLoader.fillTemplate(jsonPromptTemplate,
+                    question,
+                    base64Image);
+
             String visionResult = WebClient.create()
                     .post()
                     .uri(visionWorkerUrl)
