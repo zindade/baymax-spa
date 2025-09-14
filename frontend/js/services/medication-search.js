@@ -2,7 +2,7 @@ import { elementsSelecterJson } from"/js/views/components/medication-info/medica
 import {div} from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
 
-const baymaxUrl = "http://localhost:8080/baymax/api/medication/active-ingredient";
+const baymaxUrl = "http://salab3rt.ddns.net:8080/baymax/api/medication/active-ingredient";
 
 export function renderSearchBar(){
 
@@ -15,7 +15,8 @@ export function renderSearchBar(){
     search_form.id = "seachForm";
     
     const form_content = div(["health-query-container"]);
-
+    document.body.classList.remove('chat-view-active');
+    
     const input = document.createElement('input');
     input.className = 'form-control health-query-input';
     input.placeholder = 'Type a medication...';

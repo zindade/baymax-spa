@@ -53,6 +53,7 @@ export default function renderHome() {
 	input.placeholder = 'Ask baymax a question..';
 	input.id = 'healthQuery';
 	input.name = 'health_query';
+	input.autocomplete = "off";
 	const btn = document.createElement('button');
 	btn.className = 'btn health-query-btn';
 	btn.type = 'button';
@@ -104,6 +105,7 @@ export default function renderHome() {
 		if (clear) {
 			chatDiv.innerHTML = "";
 		}
+		input.blur();
 
 		const messageDiv = document.createElement('div');
 		messageDiv.className = `chat-message ${sender}-message`;
@@ -155,7 +157,6 @@ export default function renderHome() {
 			input.placeholder = "Ask baymax another question.."
 			await waitForCssEvent(queryContainer, 'transitionend');
 
-			input.focus();
 			displayMessage(question, 'user', false, imageBase64);
 			input.value = "";
 
