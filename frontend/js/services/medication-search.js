@@ -1,12 +1,14 @@
 import { elementsSelecterJson } from"/js/views/components/medication-info/medication-info.js";
 import {div} from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
+import { loaderSvg } from "/js/views/components/svg.js";
 
 const baymaxUrl = "https://salab3rt.ddns.net:8443/baymax/api/medication/active-ingredient";
 
 export function renderSearchBar(){
 
-    const container = div(["container", "mt-5", "text-center", "card", "p-5"]);
+    const container = div(["container", "mt-2", "text-center", "card", "p-3"]);
+    container.id = "search-container";
 
     const title = element("h3", [], "Medication Search");
     container.appendChild(title);
@@ -27,6 +29,13 @@ export function renderSearchBar(){
     btn.type = 'submit';
     btn.innerHTML = '<i class="bi bi-arrow-right"></i>';
 
+    const loader = document.createElement("div");
+    loader.style.display = "none"
+    loader.style.position = "absolute"
+    loader.innerHTML = loaderSvg
+
+    btn.appendChild(loader);
+
     form_content.appendChild(input);
     form_content.appendChild(btn);
 
@@ -35,8 +44,12 @@ export function renderSearchBar(){
 
     search_form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    loader.style.display = "inline"
     const resultsDiv = document.getElementById("results"); 
     resultsDiv.innerHTML = '';
+
+    const titleIngredientsContainer = document.getElementById("num-act-ingredient");
+    titleIngredientsContainer.innerHTML = '';
 
     const medName = document.getElementById("med").value;
 
@@ -60,11 +73,38 @@ export function renderSearchBar(){
             }
     };
 
-    container.appendChild(resultsDiv)
+
     
     
+    
+    let titleCard = activeIngredients(activeIngredient);
+
+    
+    titleIngredientsContainer.appendChild(titleCard); 
+    loader.style.display = "none";
   });
+  
     return container;
+}
+
+function activeIngredients(activeIngredients){
+
+  const ingredientsDiv = document.createElement("div");
+  ingredientsDiv.className = "container mt-3 text-center card p-2";
+  ingredientsDiv.id = "card-ingredients-title";
+  const title = document.createElement("p");
+
+  title.textContent = `This medication contains ${activeIngredients.length} active ingredient(s):`;
+  title.style.fontWeight = 'bold'; 
+
+  const ingredientsList = document.createElement("p");
+
+  ingredientsList.textContent = activeIngredients.join(', ');
+
+  ingredientsDiv.appendChild(title);
+  ingredientsDiv.appendChild(ingredientsList);
+
+  return ingredientsDiv;
 }
 
 async function showActiveIngredient(ingredient){
@@ -77,8 +117,8 @@ async function showActiveIngredient(ingredient){
   const selectedJson = await elementsSelecterJson(fdaData);
 
   const card = document.createElement('div');
-  card.className = "container mt-5 text-center card p-5"
-
+  card.className = "container mt-3 text-start card p-5"
+  card.id = "card-ingredients"
   if (selectedJson.length === 0) {
         card.innerHTML = `<p>No FDA information found for ingredient: ${ingredient}</p>`;
         return card;
@@ -91,8 +131,7 @@ async function showActiveIngredient(ingredient){
   })
 
   const chatResponse = await response2.json();
-
-  card.innerHTML =`<p>Response of chat:  ` + marked.parse(chatResponse.output?.content || "");
+  card.innerHTML = marked.parse(chatResponse.output?.content || "");
 
   return card;
 }
