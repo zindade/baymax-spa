@@ -13,6 +13,7 @@ public class OpenAiChatOptionsFactory implements FactoryBean<OpenAiChatOptions> 
 
     private String model;
     private Float temperature;
+    private Integer maxTokens;
 
     /**
      * Creates and returns a fully configured instance of {@link OpenAiChatOptions}.
@@ -24,6 +25,7 @@ public class OpenAiChatOptionsFactory implements FactoryBean<OpenAiChatOptions> 
         return OpenAiChatOptions.builder()
                 .withModel(model)
                 .withTemperature(temperature)
+                .withMaxTokens(maxTokens)
                 .build();
     }
 
@@ -54,4 +56,6 @@ public class OpenAiChatOptionsFactory implements FactoryBean<OpenAiChatOptions> 
     public void setTemperature(Float temperature) {
         this.temperature = temperature;
     }
+
+    public void setMaxTokens(String maxTokens) { this.maxTokens = Integer.parseInt(maxTokens); }
 }

@@ -10,6 +10,7 @@
     <bean id="openAiChatOptions" class="com.codeforall.online.baymax.factories.OpenAiChatOptionsFactory">
         <property name="model" value="gpt-4o" />
         <property name="temperature" value="${ai.temperature}" />
+        <property name="maxTokens" value="1024" />
     </bean>
 
     <bean id="chatClient" class="org.springframework.ai.openai.OpenAiChatClient">

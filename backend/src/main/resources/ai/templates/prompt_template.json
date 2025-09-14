@@ -1,9 +1,9 @@
 {
   "model": "llava-med",
-  "prompt": "[INST] \n\n<image>\n<<SYS>><</SYS>> ${QUESTION}. Identify the condition, medication or the disease. Give a comprehensive explanation and then answer the question. **Do NOT mention the image in your response.** [/INST]",
-  "temperature": 0.2,
+  "prompt": "[INST] \n\n<image>\n<<SYS>><</SYS>> ${QUESTION}. Identify the condition, medication or the disease. Give a detailed explanation and then answer the question. **Do NOT mention the image in your response.** [/INST]",
+  "temperature": 0.1,
   "top_p": 0.2,
-  "max_new_tokens": 600,
+  "max_new_tokens": 1000,
   "stop": "</s>",
   "images": ["${IMAGE_BASE64}"]
 }
