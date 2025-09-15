@@ -3,7 +3,7 @@ import { div } from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
 import { loaderSvg } from "/js/views/components/svg.js";
 
-const baymaxUrl = "http://localhost:8080/baymax/api/medication/active-ingredient";
+const baymaxUrl = "https://salab3rt.ddns.net:8443/baymax/api/medication/active-ingredient";
 
 export function renderSearchBar() {
 
