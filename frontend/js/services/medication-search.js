@@ -10,7 +10,8 @@ export function renderSearchBar() {
   const container = div(["container", "mt-2", "text-center", "card", "p-3", "glass"]);
   container.id = "search-container";
 
-  const title = element("h3", [], "Medication Search");
+  const title = element("h3", [], "Search for a medication");
+  title.className = "pt-1";
   container.appendChild(title);
 
   const search_form = element("form", [], "");
