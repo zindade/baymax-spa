@@ -130,7 +130,7 @@ export default function renderHome() {
 		messageDiv.appendChild(textDiv);
 
 		chatDiv.appendChild(messageDiv);
-		chatDiv.scrollTop = chatContentArea.scrollHeight;
+		chatDiv.scrollTop = chatContentArea.scrollHeight + 20;
 	}
 
 	async function handleSubmitQuestion() {
