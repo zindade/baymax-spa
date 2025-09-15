@@ -1,5 +1,5 @@
-const baymaxUrl = "https://salab3rt.ddns.net:8443/baymax/api/ask-baymax";
-const baymaxImageUrl = "https://salab3rt.ddns.net:8443/baymax/api/show-baymax"; // separate endpoint for image
+const baymaxUrl = "http://localhost:8080/baymax/api/ask-baymax";
+const baymaxImageUrl = "http://localhost:8080/baymax/api/show-baymax"; // separate endpoint for image
 
 async function handleBaymaxQuestion(question, imageBase64 = null) {
   try {

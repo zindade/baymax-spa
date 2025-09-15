@@ -3,11 +3,11 @@ import { div } from "/js/views/components/commons/div.js";
 import { element } from "/js/views/components/commons/element.js";
 import { loaderSvg } from "/js/views/components/svg.js";
 
-const baymaxUrl = "https://salab3rt.ddns.net:8443/baymax/api/medication/active-ingredient";
+const baymaxUrl = "http://localhost:8080/baymax/api/medication/active-ingredient";
 
 export function renderSearchBar() {
 
-  const container = div(["container", "mt-2", "text-center", "card", "p-3"]);
+  const container = div(["container", "mt-2", "text-center", "card", "p-3", "glass"]);
   container.id = "search-container";
 
   const title = element("h3", [], "Medication Search");
