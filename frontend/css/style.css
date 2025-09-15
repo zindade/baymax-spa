@@ -273,6 +273,7 @@ main {
   justify-content: center;
   border-radius: 20px;
   padding: 40px;
+  background-color: #00000017;
   box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
   -webkit-box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
   -moz-box-shadow: 14px 22px 27px -20px rgba(0, 0, 0, 0.59);
@@ -659,4 +660,80 @@ body.chat-view-active #content {
   .suggestion-box {
     margin-top: 0 !important;
   }
+  .team-card {
+        flex-basis: 90%;
+    }
+  
 }
+.team-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cartões quebrem para a próxima linha em telas menores */
+    justify-content: center;
+    gap: 130px; /* Reduzi um pouco o gap para melhor ajuste */
+    padding: 20px; /* Adiciona algum espaço nas laterais */
+    margin-top: 100px;
+}
+
+
+/* O cartão de perfil */
+.team-card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    flex: 1 1 45%; 
+    max-width: 350px;
+    padding: 20px;
+    padding-top: 80px; /* Aumenta o espaço no topo para o texto não ficar sob a imagem */
+    text-align: center;
+    position: relative; /* Essencial para o posicionamento da imagem */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+    transform: translateY(-10px); /* Efeito de levantar o cartão ao passar o mouse */
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Container da imagem para o posicionamento */
+.card-image {
+    position: absolute;
+    top: -100px; /* <<< O TRUQUE ACONTECE AQUI */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza a imagem horizontalmente */
+}
+
+.card-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; /* Deixa a imagem perfeitamente redonda */
+    object-fit: cover; /* Garante que a imagem não fique distorcida */
+    border: 10px solid #d8f0ea; /* Borda azul-esverdeada clara ao redor da foto */
+    background-color: #fff; /* Fundo caso a imagem tenha transparência */
+}
+
+/* Conteúdo de texto do cartão */
+.card-content {
+    margin-top: 40px; /* Empurra o conteúdo para baixo para dar espaço para a imagem */
+}
+
+.card-name {
+    margin: 10px 0 5px;
+    font-size: 1.4rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.card-role {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 400;
+}
+
+.card-description {
+    
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 1.4;
+}
+

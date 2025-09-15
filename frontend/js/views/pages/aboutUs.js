@@ -1,4 +1,6 @@
-export default function renderAboutUs() {
+import { element } from "/js/views/components/commons/element.js";
+
+/*export default function renderAboutUs() {
   const team = [
     { name: "Daniel", role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/daniel.png" },
     { name: "Mauro", role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/mauro.png" },
@@ -45,4 +47,56 @@ export default function renderAboutUs() {
 
   wrap.appendChild(row);
   return wrap;
+}*/
+
+export default function renderAboutUs(){
+  const team = [
+    { name: "Daniel", role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/daniel.png" },
+    { name: "Mauro", role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/mauro.png" },
+    { name: "Pedro", role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/pedro.png" },
+    { name: "Tiago", role: "Software Engineer", blurb: "2025 class06 codeforall_ alumni", img: "../assets/teamPhotos/tiago.png" },
+  ];
+
+  const container = document.createElement("div");
+  container.classList = "team-container";
+
+  team.forEach(person => {
+
+    const card = createCard(person);
+    container.appendChild(card);
+
+  });
+
+  return container;
+
+}
+
+function createCard(person){
+
+  const card = document.createElement("div");
+  card.classList = "team-card";
+
+  const cardImage = document.createElement("div");
+  cardImage.classList = "card-image";
+  const image = document.createElement("img");
+  image.src = person.img;
+  image.alt = `Photo of ${person.name}, ${person.role}`;
+
+  cardImage.appendChild(image);
+
+  const cardContent = document.createElement("div");
+  cardContent.classList = "card-content"
+
+  const name = element("h3", ["card-name"], person.name);
+  const role = element("p", ["card-role"], person.role);
+  const description = element("p", ["card-description"], person.blurb)
+
+  cardContent.appendChild(name);
+  cardContent.appendChild(role);
+  cardContent.appendChild(description);
+
+  card.appendChild(cardImage);
+  card.appendChild(cardContent);
+
+  return card;
 }
